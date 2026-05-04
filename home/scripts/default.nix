@@ -1,0 +1,15 @@
+{ pkgs, ... }:
+let
+  rebuild-system = pkgs.writeShellScriptBin "rebuild-system" (builtins.readFile ./rebuild-system.sh);
+  hyprdispatch = pkgs.writeShellScriptBin "hyprdispatch" (builtins.readFile ./hyprdispatch.sh);
+  hyprfloat-kitty = pkgs.writeShellScriptBin "hyprfloat-kitty" (builtins.readFile ./hyprfloat-kitty.sh);
+  tmux-next-session = pkgs.writeShellScriptBin "tmux-next-session" (builtins.readFile ./tmux-next-session.sh);
+in
+{
+  home.packages = [
+    rebuild-system
+    hyprdispatch
+    hyprfloat-kitty
+    tmux-next-session
+  ];
+}
