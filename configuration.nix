@@ -35,7 +35,7 @@ in
       "quiet" 
       "splash"
       "resume=UUID=e6d121e9-a58b-452f-9866-009ec03e1540"
-      "resume_offset=12146688"
+      "resume_offset=26353664"
     ];
     kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
       lib.mkDefault pkgs.linuxPackages_6_18
