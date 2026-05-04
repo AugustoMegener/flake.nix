@@ -27,26 +27,18 @@ in
     };
   };
 
-
   
   boot = {
     kernelModules = [ "btusb" ];
     kernelParams = [ 
       "quiet" 
       "splash"
-      "resume=UUID=f89c3176-23c0-42c4-8bf0-bafa4aba9c00"
-      "resume_offset=26353664"
     ];
     kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
       lib.mkDefault pkgs.linuxPackages_6_18
     );
     plymouth.enable = true;
   };
-
-  swapDevices = [{
-    device = "/home/swapfile";
-    size = 16384;
-  }];
 
   services.blueman.enable = true;
 
