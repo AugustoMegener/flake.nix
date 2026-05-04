@@ -1,0 +1,37 @@
+{
+    description = "Standalone Home Manager Hyprland configuration";
+
+    inputs = {
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+        home-manager.url = "github:nix-community/home-manager/master";
+    };
+
+    outputs =
+        inputs@{ home-manager, nixpkgs, ... }:
+        let
+        systems = [
+        "x86_64-linux"
+        ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+        homeModules.default = ./config;
+
+        homeConfigurations = forAllSystems (
+            system:
+            home-manager.lib.homeManagerConfiguration {
+                pkgs = import nixpkgs { inherit system; };
+                extraSpecialArgs = { inherit inputs; };
+
+                modules = [
+                    ./config
+                    {
+                        home.username = "kito";
+                        home.homeDirectory = "/home/kito";
+                        home.stateVersion = "25.05";
+                    }
+                ];
+            }
+        );
+    };
+}
