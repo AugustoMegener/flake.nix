@@ -31,12 +31,17 @@ in
   
   boot = {
     kernelModules = [ "btusb" ];
-    kernelParams = [ "quiet" "splash" ];
+    kernelParams = [ 
+      "quiet" 
+      "splash"
+      "resume=UUID=e6d121e9-a58b-452f-9866-009ec03e1540"
+      "resume_offset=12146688"
+    ];
     plymouth.enable = true;
   };
 
   swapDevices = [{
-    device = "/swapfile";
+    device = "/home/swapfile";
     size = 16384;
   }];
 
