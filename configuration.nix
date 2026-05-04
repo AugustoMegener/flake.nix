@@ -35,6 +35,11 @@ in
     plymouth.enable = true;
   };
 
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16384;
+  }];
+
   services.blueman.enable = true;
 
   nix.settings.experimental-features = [
