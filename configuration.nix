@@ -34,7 +34,7 @@ in
     kernelParams = [ 
       "quiet" 
       "splash"
-      "resume=UUID=e6d121e9-a58b-452f-9866-009ec03e1540"
+      "resume=UUID=f89c3176-23c0-42c4-8bf0-bafa4aba9c00"
       "resume_offset=26353664"
     ];
     kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
