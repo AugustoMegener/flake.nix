@@ -6,6 +6,6 @@
     curl
     fastfetch
     p7zip
-    cowsay
+    kittysay
   ];
 }
