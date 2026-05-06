@@ -6,6 +6,7 @@
 
   extraPackages = with pkgs; [
     ktlint
+    eslint_d
   ];
 
   extraConfigLua = builtins.readFile ./setup.lua;

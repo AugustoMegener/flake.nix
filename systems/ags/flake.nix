@@ -22,8 +22,7 @@
 
     astalPackages = with ags.packages.${system}; [
       io
-      astal4 # or astal3 for gtk3
-      # notifd tray wireplumber
+      astal4
       hyprland
     ];
 
@@ -68,6 +67,9 @@
           })
         ];
       };
+      shellHook = ''
+        export XDG_DATA_DIRS=${pkgs.lib.makeSearchPath "share" extraPackages}:$XDG_DATA_DIRS
+      '';
     };
   };
 }

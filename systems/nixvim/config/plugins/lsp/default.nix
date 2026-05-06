@@ -3,6 +3,8 @@ let
 kotlinLsp = pkgs.callPackage ../deps/kotlin-lsp.nix { };
 in
 {
+  
+
   plugins.lsp = {
     enable = true;
     capabilities = ''
@@ -54,7 +56,10 @@ kotlin_lsp = {
   };
 };
 
-      vtsls.enable = true;
+vtsls = {
+  enable = true;
+  rootMarkers = [ "tsconfig.json" "package.json" "jsconfig.json" ];
+};
 
       angularls.enable = false;
       tsgo.enable = false;
