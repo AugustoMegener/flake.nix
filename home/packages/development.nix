@@ -17,5 +17,7 @@
     better-commits
     cmake
     inih
+    gnumake
+    openssl.dev
   ];
 }
