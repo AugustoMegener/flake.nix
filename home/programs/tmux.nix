@@ -13,6 +13,17 @@
     ];
 
     extraConfig = ''
+      set-hook -g client-detached 'run-shell "tmux list-panes -t \#{session_name} -F \"\#{pane_pid}\" | xargs -I{} ps --ppid {} -o comm= | grep -qv zsh || tmux kill-session -t \#{session_name}"'
+
+      setw -g mode-keys vi
+      
+      set -g base-index 1
+      set -g renumber-windows on
+
+      unbind C-b
+      set -g prefix M-Space
+      bind M-Space send-prefix
+
       set -g status-style "bg=default,fg=#9c7d5e"
 
       set -g status-position top

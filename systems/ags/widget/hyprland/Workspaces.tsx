@@ -41,7 +41,7 @@ export function workspacesSelector(hypr: Hyprland, defaults: number[]) {
   }
 
   hypr.connect("notify::workspaces",      workspaceEvent)
-  hypr.connect("notify::workspace-focus", workspaceEvent)
+  hypr.connect("notify::focused-workspace", workspaceEvent)
   workspaceEvent()
 
   return selectorBox

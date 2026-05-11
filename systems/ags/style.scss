@@ -17,7 +17,7 @@ $ws4: #4396b7;
 
 window.Bar {
   background: transparent;
-  color: $fg;
+  color: $muted;
   font-weight: bold;
 
   > centerbox {
@@ -36,7 +36,9 @@ window.Bar {
 
 hypr-workspace {
 	border-width: 0;
-	min-width: 20px;
+	min-width: 33px;
+  min-height: 33px;
+  transition: border, border-color, box-shadow, transform 140ms cubic-bezier(0.68, -0.55, 0.27, 1.55); 
 }
 
 hypr-workspaces-selector label {
@@ -55,7 +57,15 @@ hypr-workspace.focused {
 	transition: none;
 }
 
+hypr-workspace.focused {
+
+  transition: border, border-color, box-shadow, transform 140ms cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+}
+
 hypr-workspace.focused label { margin-bottom: 2px; }
+hypr-workspace:not(.focused):active label { 
+  margin-top: 8px;
+}
 
 hypr-workspace.focused:nth-child(1),
 hypr-workspace.focused:nth-child(5)  { border: 1px solid $ws1; }
@@ -83,12 +93,22 @@ hypr-workspace:not(:last-child):not(.focused):hover {
 	border-right: 0.5px solid $sep;
 }
 
-hypr-workspace:hover,
-hypr-workspace:hover:not(.focused) {
-	background: transparent;
+hypr-workspace:hover {
 	border: none;
 	box-shadow: none;
 	text-shadow: none;
+	box-shadow:
+		inset 0px 1px 0px 0px rgba(255, 255, 255, 0.1),
+		inset 0px calc(-2px) 0px 1px rgba(0, 0, 0, 0.25),
+		0px 1px 2px -0.1px rgba(0, 0, 0, 0.47);
+}
+
+hypr-workspace:hover:not(.focused) {
+	background: transparent;
+  color: #987f5f; 
+	border: none;
+	box-shadow: none;
+	text-shadow: none; 
 }
 
 hypr-workspace:not(.focused):hover label { margin-bottom: 2px; }

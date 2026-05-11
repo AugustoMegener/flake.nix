@@ -39,7 +39,7 @@
       "$mainMod SHIFT, 8, movetoworkspace, 8"
       "$mainMod SHIFT, 9, movetoworkspace, 9"
       "$mainMod SHIFT, 0, movetoworkspace, 10"
-      ", Print, exec, bash -lc 'choice=$(printf \"region\\noutput\\nwindow\" | walker --dmenu); [ -n \"$choice\" ] && hyprshot -m \"$choice\"'"
+      '', Print, exec, bash -lc 'choice=$(printf "󰒉  Region\n󰍹  Output\n  Window" | walker --dmenu); [ -n "$choice" ] && hyprshot -m "$(echo "$choice" | awk "{print tolower(\$2)}")" --output-folder ~/Pictures/Printscreens' ''
       "$mainMod, S, togglespecialworkspace, magic"
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
       "$mainMod, mouse_down, workspace, e+1"
