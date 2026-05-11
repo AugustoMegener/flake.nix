@@ -1,6 +1,16 @@
 { lib, ... }:
 {
   keymaps = [
+{
+  mode = "n";
+  key = "<Esc>";
+  action = lib.nixvim.mkRaw "function() vim.fn.setreg('/', '') vim.cmd('noh') end";
+}
+    {
+      mode = "n";
+      key = "<Space>";
+      action = "<Nop>";
+    }
     {
       mode = "n";
       key = "<leader>e";
@@ -39,42 +49,42 @@
     {
       mode = "n";
       key = "K";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.hover";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.hover() end";
     }
     {
       mode = "n";
       key = "gd";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.definition";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.definition() end";
     }
     {
       mode = "n";
       key = "gr";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.references";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.references() end";
     }
     {
       mode = "n";
       key = "gi";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.implementation";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.implementation() end";
     }
     {
       mode = "n";
       key = "<leader>rn";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.rename";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.rename() end";
     }
     {
       mode = "n";
       key = "<leader>ca";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.code_action";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.code_action() end";
     }
     {
       mode = "n";
       key = "<leader>f";
-      action = lib.nixvim.mkRaw "vim.lsp.buf.format";
+      action = lib.nixvim.mkRaw "function() vim.lsp.buf.format() end";
     }
     {
       mode = "n";
       key = "<leader>d";
-      action = lib.nixvim.mkRaw "vim.diagnostic.open_float";
+      action = lib.nixvim.mkRaw "function() vim.diagnostic.open_float() end";
     }
     {
       mode = "n";

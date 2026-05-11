@@ -59,6 +59,18 @@
       };
     };
 
+    nixpkgs.overlays = [
+      (final: prev: {
+        gtk4 = prev.gtk4.overrideAttrs {
+          version = "4.22.2";
+          src = final.fetchurl {
+            url = "https://download.gnome.org/sources/gtk/4.22/gtk-4.22.2.tar.xz";
+            hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+          };
+        };
+      })
+    ];
+
     devShells.${system} = {
       default = pkgs.mkShell {
         buildInputs = [

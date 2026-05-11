@@ -17,7 +17,7 @@ local gruvbox = {
     b = { fg = colors.fg0, bg = colors.bg3 },
     c = { fg = colors.fg0, bg = colors.bg1 },
   },
-  insert = {
+insert = {
     a = { fg = colors.bg1, bg = colors.green, gui = "bold" },
   },
   visual = {
@@ -96,7 +96,17 @@ require("lualine").setup({
       "mode",
     },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename" },
+    lualine_c = { 
+      "filename",
+      {
+        function()
+          return require("noice").api.status.command.get()
+        end,
+        cond = function()
+          return require("noice").api.status.command.has()
+        end,
+      },
+    }, 
     lualine_x = { "filetype" },
     lualine_y = { "progress" },
     lualine_z = {

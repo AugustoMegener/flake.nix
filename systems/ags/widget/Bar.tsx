@@ -11,7 +11,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 
   const hyprland = Hyprland.get_default()
 
-  function Workspaces() { return workspacesSelector(hyprland, [ 1, 2, 3, 4, 5 ]) }
+  function Workspaces() { return workspacesSelector(hyprland, [ 1, 2, 3, 4, 5 ]) }
 
   return (
     <window
