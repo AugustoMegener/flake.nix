@@ -88,7 +88,7 @@ end
 
 
 if vim.g.started_by_firenvim then
-  vim.opt.guifont = "Go Mono Nerd Font:h14"
+  vim.opt.guifont = "Go Mono Nerd Font:h9"
   vim.opt.laststatus = 0
   vim.opt.showtabline = 0
 
