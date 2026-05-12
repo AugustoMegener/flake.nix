@@ -22,5 +22,6 @@
     ./image_preview
     ./image
     ./obsidian
+    ./firenvim
   ];
 }
