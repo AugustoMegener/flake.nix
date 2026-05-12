@@ -10,5 +10,6 @@
     ./kitty.nix
     ./fastfetch.nix
     ./obsidian.nix
+    ./zen-browser.nix
   ];
 }
