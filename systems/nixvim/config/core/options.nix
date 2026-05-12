@@ -92,24 +92,25 @@ if vim.g.started_by_firenvim then
   vim.opt.laststatus = 0
   vim.opt.showtabline = 0
 
-  vim.api.nvim_create_autocmd("UIEnter", {
-    callback = function()
-      vim.defer_fn(function()
-        if vim.opt.lines:get() < 10 then
-          vim.opt.lines = 10
-        end
-      end, 200)
-    end,
-  })
+  require("barbecue").setup({ enabled = false })
 
-  vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+  --[[vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
     callback = function()
-      local lines = vim.api.nvim_buf_line_count(0)
-      if vim.opt.lines:get() ~= lines then
-        vim.opt.lines = math.max(lines, 10)
-      end
+      firenvim.resizeEditor()
     end,
+  })]]
+
+if vim.g.started_by_firenvim then
+  require("noice").setup({
+    routes = {
+      {
+        filter = { event = "msg_show", find = "E36" },
+        opts = { skip = true },
+      },
+    },
   })
+end
+
 end
   '';
 }

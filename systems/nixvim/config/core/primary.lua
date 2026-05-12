@@ -28,7 +28,7 @@ function M.setup()
   local hl = function(group, opts)
     vim.api.nvim_set_hl(0, group, opts)
   end
-
+  
   hl("Normal",          { fg = c.fg,     bg = c.bg })
   hl("NormalFloat",     { fg = c.fg,     bg = c.bg1 })
   hl("FloatBorder",     { fg = c.bg2,    bg = c.bg1 })
