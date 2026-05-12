@@ -63,5 +63,53 @@
       end,
       hide = orig_virtual_text.hide,
     }
+
+if vim.g.started_by_firenvim then
+  vim.opt.guifont = "Go Mono Nerd Font:h14"
+  vim.opt.laststatus = 0
+  vim.opt.showtabline = 0
+
+  require("noice").setup({ enabled = false })
+
+  vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+    callback = function()
+      firenvim.resizeEditor()
+    end,
+  })
+
+  vim.keymap.set({ "n", "i" }, "<C-CR>", function()
+    vim.fn["firenvim#press_keys"]("<CR>")
+    vim.cmd("stopinsert")
+  end)
+end
+
+
+
+
+
+if vim.g.started_by_firenvim then
+  vim.opt.guifont = "Go Mono Nerd Font:h14"
+  vim.opt.laststatus = 0
+  vim.opt.showtabline = 0
+
+  vim.api.nvim_create_autocmd("UIEnter", {
+    callback = function()
+      vim.defer_fn(function()
+        if vim.opt.lines:get() < 10 then
+          vim.opt.lines = 10
+        end
+      end, 200)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+    callback = function()
+      local lines = vim.api.nvim_buf_line_count(0)
+      if vim.opt.lines:get() ~= lines then
+        vim.opt.lines = math.max(lines, 10)
+      end
+    end,
+  })
+end
   '';
 }
