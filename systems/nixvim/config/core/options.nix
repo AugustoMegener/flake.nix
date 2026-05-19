@@ -37,6 +37,12 @@
   };
 
   extraConfigLua = ''
+
+    vim.cmd([[
+      syntax match EscapeSeq /\\n/ conceal cchar=  
+      syntax match EscapeSeqOther /\\./ conceal 
+    ]])
+
     vim.diagnostic.config({
       signs = true,
       underline = true,

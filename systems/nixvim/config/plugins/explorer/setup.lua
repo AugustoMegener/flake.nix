@@ -46,7 +46,7 @@ require("neo-tree").setup({
     },
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
+--[[vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argc() == 1 then
       local arg = vim.fn.argv(0)
@@ -55,4 +55,4 @@ vim.api.nvim_create_autocmd("VimEnter", {
       end
     end
   end,
-})
+})]]
