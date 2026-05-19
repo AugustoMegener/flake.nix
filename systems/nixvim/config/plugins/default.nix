@@ -23,5 +23,7 @@
     ./image
     ./obsidian
     ./firenvim
+    ./vim-move
+    ./dashboard
   ];
 }

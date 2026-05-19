@@ -14,7 +14,7 @@
     {
       mode = "n";
       key = "<leader>e";
-      action = "<cmd>Neotree toggle<cr>";
+      action = "<cmd>Oil<cr>";
     }
     {
       mode = "n";
@@ -130,6 +130,12 @@
       mode = "n";
       key = "<leader>bp";
       action = "<cmd>bprev<cr>";
+    }
+    
+    {
+      mode = "n";
+      key = "<leader>bp";
+      action = "<cmd>DapToggleBreakpoint<cr>";
     }
   ];
 }
