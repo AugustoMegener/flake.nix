@@ -165,7 +165,7 @@
     }
     {
         mode = "n";
-        key = "<cr>";
+        key = "<S-CR>";
         action.__raw = ''
             function()
             return require("obsidian").util.smart_action()
