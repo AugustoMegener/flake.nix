@@ -3,6 +3,11 @@ let
   kotlinLsp = pkgs.callPackage ../deps/kotlin-lsp.nix { };
 in
 {
+
+  extraPackages = [
+    pkgs.qt6.qtdeclarative
+  ];
+
   plugins.lsp = {
     enable = true;
     capabilities = ''
@@ -33,6 +38,11 @@ in
             };
           };
         };
+      };
+      
+      qmlls = {
+        enable = true;
+        package = pkgs.qt6.qtdeclarative;
       };
 
       jdtls.enable = true;
