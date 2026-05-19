@@ -13,7 +13,7 @@
   plugins.oil = {
     enable = true;
 
-    config = {
+    settings = {
       default_file_explorer = true;
       columns = [
         "icon"
@@ -68,7 +68,7 @@
           end
           '';
         mv = lib.nixvim.mkRaw ''
-          function(src_path; dest_path)
+          function(src_path, dest_path)
           return true
           end
           '';
