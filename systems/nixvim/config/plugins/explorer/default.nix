@@ -32,25 +32,25 @@
       };
       constrain_cursor = "editable";
       watch_for_changes = false;
-      keymaps = {
-        "g?" = { action = "actions.show_help"; mode = "n"; };
-        "<CR>" = { action = "actions.select"; };
-        "<C-s>" = { action = "actions.select"; opts.vertical = true; };
-        "<C-h>" = { action = "actions.select"; opts.horizontal = true; };
-        "<C-t>" = { action = "actions.select"; opts.tab = true; };
-        "<C-p>" = { action = "actions.preview"; };
-        "<C-c>" = { action = "actions.close"; mode = "n"; };
-        "<C-l>" = { action = "actions.refresh"; };
-        "-" = { action = "actions.parent"; mode = "n"; };
-        "_" = { action = "actions.open_cwd"; mode = "n"; };
-        "`" = { action = "actions.cd"; mode = "n"; };
-        "g~" = { action = "actions.cd"; opts.scope = "tab"; mode = "n"; };
-        "gs" = { action = "actions.change_sort"; mode = "n"; };
-        "gx" = { action = "actions.open_external"; };
-        "g." = { action = "actions.toggle_hidden"; mode = "n"; };
-        "g\\" = { action = "actions.toggle_trash"; mode = "n"; };
-      };
-      use_default_keymaps = true;
+#       keymaps = {
+#         "g?" = { action = "actions.show_help"; mode = "n"; };
+#         "<CR>" = { action = "actions.select"; };
+#         "<C-s>" = { action = "actions.select"; opts.vertical = true; };
+#         "<C-h>" = { action = "actions.select"; opts.horizontal = true; };
+#         "<C-t>" = { action = "actions.select"; opts.tab = true; };
+#         "<C-p>" = { action = "actions.preview"; };
+#         "<C-c>" = { action = "actions.close"; mode = "n"; };
+#         "<C-l>" = { action = "actions.refresh"; };
+#         "-" = { action = "actions.parent"; mode = "n"; };
+#         "_" = { action = "actions.open_cwd"; mode = "n"; };
+#         "`" = { action = "actions.cd"; mode = "n"; };
+#         "g~" = { action = "actions.cd"; opts.scope = "tab"; mode = "n"; };
+#         "gs" = { action = "actions.change_sort"; mode = "n"; };
+#         "gx" = { action = "actions.open_external"; };
+#         "g." = { action = "actions.toggle_hidden"; mode = "n"; };
+#         "g\\" = { action = "actions.toggle_trash"; mode = "n"; };
+#       };
+#       use_default_keymaps = true;
 
       view_options = {
         show_hidden = false;
