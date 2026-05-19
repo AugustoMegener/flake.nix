@@ -40,9 +40,9 @@ in
         };
       };
       
-      qmlls = {
+      plugins.lsp.servers.qmlls = {
         enable = true;
-        package = pkgs.qt6.qtdeclarative;
+        cmd = [ "qmlls" "-E" ];
       };
 
       jdtls.enable = true;
