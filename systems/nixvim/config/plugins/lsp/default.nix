@@ -42,7 +42,7 @@ in
       
       plugins.lsp.servers.qmlls = {
         enable = true;
-        package = null;
+        package = lib.mkForce null;
         cmd = [ "qmlls" "-E" ];
       };
 
