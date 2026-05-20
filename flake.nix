@@ -37,6 +37,11 @@
     };
 
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
