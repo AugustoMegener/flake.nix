@@ -1,3 +1,0 @@
-
-
-[1;33mBuilded in switch mode. Do not forget to run rebuild-system switch to keep changes persistently[0m
