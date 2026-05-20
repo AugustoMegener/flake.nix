@@ -20,6 +20,6 @@
       center = true
     }
 
-    layerrule = noanim, quickshell
+    layerrule = no_anim on, match:namespace quickshell
   '';
 }
