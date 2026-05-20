@@ -42,6 +42,7 @@ in
       
       plugins.lsp.servers.qmlls = {
         enable = true;
+        package = null;
         packageFallback = true;
       };
 
