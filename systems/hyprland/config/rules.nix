@@ -21,6 +21,7 @@
     }
 
     layerrule {
+      name = quickshell-noanim
       no_anim = on
       match:namespace = quickshell
     }
