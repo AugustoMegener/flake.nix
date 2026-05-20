@@ -19,5 +19,7 @@
       size = 800 600
       center = true
     }
+
+    layerrule = noanim, quickshell
   '';
 }
