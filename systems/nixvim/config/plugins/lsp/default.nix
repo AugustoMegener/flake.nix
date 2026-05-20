@@ -42,7 +42,7 @@ in
       
       plugins.lsp.servers.qmlls = {
         enable = true;
-        extraOptions.cmd = [ "qmlls" "-E" ];
+        packageFallback = true;
       };
 
       jdtls.enable = true;
