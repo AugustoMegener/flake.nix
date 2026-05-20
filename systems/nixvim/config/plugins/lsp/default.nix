@@ -42,8 +42,7 @@ in
       
       plugins.lsp.servers.qmlls = {
         enable = true;
-        package = lib.mkForce null;
-        cmd = [ "qmlls" "-E" ];
+        extraOptions.cmd = [ "qmlls" "-E" ];
       };
 
       jdtls.enable = true;
