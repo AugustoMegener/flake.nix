@@ -14,7 +14,8 @@
     {
       mode = "n";
       key = "<leader>e";
-      action = "<cmd>Oil<cr>";
+      #action = "<cmd>Oil<cr>";
+      action = "<cmd>lua MiniFiles.open()<CR>";
     }
     {
       mode = "n";
