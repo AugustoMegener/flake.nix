@@ -70,6 +70,7 @@ in
       "inode/directory" = [ "yazi-kitty.desktop" ];
       "text/plain" = [ "nvim.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "image/svg+xml" = [ "org.inkscape.Inkscape.desktop" ];
     };
   };
   home.packages = [ yazi-kitty ];
