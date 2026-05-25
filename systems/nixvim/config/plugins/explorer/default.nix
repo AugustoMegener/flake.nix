@@ -10,8 +10,20 @@
       ripgrep
   ];
 
-  plugins.oil = {
+  plugins.mini = {
     enable = true;
+    modules = {
+      files = {
+        options = {
+          permanent_delete = true;
+          use_as_default_explorer = true;
+        };
+      };
+    };
+  };
+
+  plugins.oil = {
+    enable = false;
 
     settings = {
       default_file_explorer = true;
