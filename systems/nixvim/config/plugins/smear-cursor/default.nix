@@ -5,21 +5,7 @@
     enable = true;
     settings = {
       opts = {
-        cursor_color = lib.nixvim.mkRaw ''
-          function()
-            local colors = {
-              n = "#f29554",
-              i = "#6bc99d",
-              v = "#9595d9",
-              V = "#9595d9",
-              ["\22"] = "#9595d9",
-              R = "#f25146",
-              c = "#e3a824",
-            }
-            return colors[vim.fn.mode()] or "#f29554"
-          end
-        '';
-        smear_between_buffers = true;
+        cursor_color = "Cursor";        smear_between_buffers = true;
         smear_between_neighbor_lines = true;
         scroll_buffer_space = true;
         legacy_computing_symbols_support = false;
