@@ -8,6 +8,7 @@
 
   plugins.auto-session = {
     enable = true;
+    settings.pre_save_cmds = [ "lua pcall(MiniFiles.close)" ];
   };
 
   extraConfigLua = builtins.readFile ./setup.lua;
