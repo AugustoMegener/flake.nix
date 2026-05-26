@@ -25,5 +25,6 @@
     ./firenvim
     ./vim-move
     ./dashboard
+    ./smear-cursor
   ];
 }
