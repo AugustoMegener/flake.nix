@@ -20,6 +20,7 @@ telescope.setup({
   }
 })
 
+--[[
 require("neo-tree").setup({
     window = {
         width = 30,
@@ -44,7 +45,7 @@ require("neo-tree").setup({
             end,
         },
     },
-})
+})]]
 
 --[[vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()

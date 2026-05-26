@@ -56,7 +56,7 @@ in
       };
 
       kotlin_lsp = {
-        enable = true;
+        enable = false;
         package = kotlinLsp;
         extraOptions = {
           init_options = {
