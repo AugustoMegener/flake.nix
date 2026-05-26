@@ -145,11 +145,20 @@
       key = "<Tab>";
       action = "<cmd>BufferLineCycleNext<cr>";
     }
-
     {
       mode = "n";
       key = "<S-Tab>";
       action = "<cmd>BufferLineCyclePrev<cr>";
+    }
+    {
+      mode = "n";
+      key = "<leader>cb";
+      action = "<cmd>BufferLinePickClose<cr>";
+    }
+    {
+      mode = "n";
+      key = "<leader>cob";
+      action = "<cmd>BufferLineCloseOthers<cr>";
     }
   ];
 }
