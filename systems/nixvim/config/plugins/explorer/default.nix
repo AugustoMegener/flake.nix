@@ -2,7 +2,7 @@
 {
   extraPlugins = with pkgs.vimPlugins; [
     telescope-nvim
-      neo-tree-nvim
+      #neo-tree-nvim
   ];
 
   extraPackages = with pkgs; [
