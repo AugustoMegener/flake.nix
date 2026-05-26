@@ -3,8 +3,9 @@
 
   plugins.smear-cursor = {
     enable = true;
+
     settings = {
-  cursor_color = "Cursoro";
+      cursor_color = "CursorLine";
       opts = {
         smear_between_buffers = true;
         smear_between_neighbor_lines = true;
