@@ -3,7 +3,7 @@
 
   plugins.smear-cursor = {
     enable = true;
-    settigngs = {
+    settigns = {
       cursor_color = lib.nixvim.mkRaw ''
       function()
         return {
