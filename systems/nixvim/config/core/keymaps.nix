@@ -15,7 +15,8 @@
       mode = "n";
       key = "<leader>e";
       #action = "<cmd>Oil<cr>";
-      action = "<cmd>lua MiniFiles.open()<CR>";
+      #action = "<cmd>lua MiniFiles.open()<CR>";
+      action = "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>"; 
     }
     {
       mode = "n";
