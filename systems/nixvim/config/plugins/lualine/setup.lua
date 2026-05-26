@@ -137,5 +137,15 @@ vim.api.nvim_create_autocmd("ModeChanged", {
     local color = mode_cursor_colors[vim.fn.mode()] or "#f29554"
     vim.api.nvim_set_hl(0, "Cursor", { fg = "NONE", bg = color })
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = color, bold = true })
+    vim.api.nvim_set_hl(0, "SmearCursorHideable", { fg = "none", bg = color, blend = 0 }) 
+    require("smear_cursor.color").clear_cache()
   end,
 })
+
+local smear_color = require("smear_cursor.color") -- adiciona daqui pra baixo
+local _unhide = smear_color.unhide_real_cursor
+smear_color.unhide_real_cursor = function()
+  _unhide()
+  local color = mode_cursor_colors[vim.fn.mode()] or "#f29554"
+  vim.api.nvim_set_hl(0, "SmearCursorHideable", { fg = "none", bg = color, blend = 0 })
+end
