@@ -138,5 +138,18 @@
       key = "<leader>bp";
       action = "<cmd>DapToggleBreakpoint<cr>";
     }
+
+
+    {
+      mode = "n";
+      key = "<Tab>";
+      action = "<cmd>BufferLineCycleNext<cr>";
+    }
+
+    {
+      mode = "n";
+      key = "<S-Tab>";
+      action = "<cmd>BufferLineCyclePrev<cr>";
+    }
   ];
 }
