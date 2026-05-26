@@ -4,7 +4,7 @@
   plugins.smear-cursor = {
     enable = true;
     settigngs = {
-      cursor-color = lib.nixvim.mkRaw ''
+      cursor_color = lib.nixvim.mkRaw ''
       function()
         return {
           n = "#f29554",
