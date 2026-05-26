@@ -4,6 +4,7 @@
   plugins.smear-cursor = {
     enable = true;
     settigngs = {
+      cursor-color = null;
       opts = {
         smear_between_buffers = true;
         smear_between_neighbor_lines = true;
