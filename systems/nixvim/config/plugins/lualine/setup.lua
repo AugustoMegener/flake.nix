@@ -135,7 +135,7 @@ local mode_cursor_colors = {
 vim.api.nvim_create_autocmd("ModeChanged", {
   callback = function()
     local color = mode_cursor_colors[vim.fn.mode()] or "#f29554"
-    vim.api.nvim_set_hl(0, "CursorLine", { fg = "NONE", bg = color })
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "NONE", bg = color })
     vim.api.nvim_set_hl(0, "CursorLineNr", { fg = color, bold = true })
   end,
 })
