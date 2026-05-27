@@ -8,7 +8,7 @@
   ];
 
   plugins.auto-session = {
-    enable = false;
+    enable = true;
     settings.pre_save_cmds = [ "lua pcall(MiniFiles.close)" ];
   };
 
