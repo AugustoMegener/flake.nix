@@ -61,7 +61,7 @@
   }@inputs:
   {
     nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
-      stdenv.hostPlatform.system = "x86_64-linux";
+      system = "x86_64-linux";
       modules = [ 
         ./configuration.nix 
         home-manager.nixosModules.home-manager
