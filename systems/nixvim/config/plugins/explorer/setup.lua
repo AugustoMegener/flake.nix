@@ -3,11 +3,6 @@ local actions = require("telescope.actions")
 
 telescope.setup({
   defaults = {
-    mappings = {
-      i = {
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-      },
-    },
     border = true,
   },
   commands = {
@@ -18,6 +13,15 @@ telescope.setup({
         end
       end,
   }
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    if require("auto-session").session_restored() then
+      MiniFiles.close()
+    end
+  end,
 })
 
 --[[
