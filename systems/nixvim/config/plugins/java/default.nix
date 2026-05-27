@@ -1,4 +1,4 @@
-{ pkgs, gradle-nvim, inputs, ... }:
+{ pkgs, inputs, ... }:
 let
 gradle-nvim = inputs.gradle-nvim;
 
