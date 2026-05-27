@@ -14,18 +14,6 @@
     astal.url = "github:aylur/astal";
     ags.url = "github:aylur/ags";
 
-    nvim-dap-kotlin = {
-      url = "github:Mgenuit/nvim-dap-kotlin";
-      flake = false;
-    };
-    kotlin-nvim = {
-      url = "github:AlexandrosAlexiou/kotlin.nvim";
-      flake = false;
-    };
-    gradle-nvim = {
-      url = "github:oclay1st/gradle.nvim";
-      flake = false;
-    };
     hyprland-config = {
       url = "path:./systems/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
