@@ -10,6 +10,16 @@
       url = "github:oclay1st/gradle.nvim";
       flake = false;
     };
+
+    nvim-dap-kotlin = {
+      url = "github:Mgenuit/nvim-dap-kotlin";
+      flake = false;
+    };
+
+    kotlin-nvim = {
+      url = "github:AlexandrosAlexiou/kotlin.nvim";
+      flake = false;
+    };
   };
 
   outputs =
