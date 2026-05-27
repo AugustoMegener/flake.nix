@@ -4,11 +4,6 @@
     nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    gradle-nvim = {
-      url = "github:oclay1st/gradle.nvim";
-      flake = false;
-    };
-
     nvim-dap-kotlin = {
       url = "github:Mgenuit/nvim-dap-kotlin";
       flake = false;
