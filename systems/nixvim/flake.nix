@@ -13,6 +13,11 @@
       url = "github:AlexandrosAlexiou/kotlin.nvim";
       flake = false;
     };
+
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

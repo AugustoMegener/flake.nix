@@ -15,14 +15,6 @@ telescope.setup({
   }
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  once = true,
-  callback = function()
-    if require("auto-session").session_restored() then
-      MiniFiles.close()
-    end
-  end,
-})
 
 --[[
 require("neo-tree").setup({
