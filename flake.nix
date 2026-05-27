@@ -25,64 +25,59 @@
     };
 
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
-  {
-    self,
-    nixpkgs,
-    home-manager,
-    zen-browser,
-    elephant,
-    walker,
-    astal,
-    ags,
-    nixgl,
-    hyprland-config,
-    hytale-launcher,
-    ...
-  }@inputs:
-  {
-    nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [ 
-        ./configuration.nix 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.kito = import ./home/manager.nix;
-        }
-        { 
-          disabledModules = [ "services/misc/elephant.nix" ]; 
-        }
-        walker.nixosModules.default
-        {
-          nix.settings = {
-            extra-substituters = [
-              "https://walker.cachix.org"
-              "https://walker-git.cachix.org"
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      zen-browser,
+      elephant,
+      walker,
+      astal,
+      ags,
+      nixgl,
+      hyprland-config,
+      hytale-launcher,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.kito = import ./home/manager.nix;
+          }
+          {
+            disabledModules = [ "services/misc/elephant.nix" ];
+          }
+          walker.nixosModules.default
+          {
+            nix.settings = {
+              extra-substituters = [
+                "https://walker.cachix.org"
+                "https://walker-git.cachix.org"
+              ];
+              extra-trusted-public-keys = [
+                "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+                "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+              ];
+            };
+          }
+          {
+            nixpkgs.overlays = [
+              nixgl.overlay
             ];
-            extra-trusted-public-keys = [
-              "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
-              "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+            environment.systemPackages = [
+              nixgl.packages.x86_64-linux.nixGLIntel
             ];
-          };
-        }
-        {
-          nixpkgs.overlays = [ 
-            nixgl.overlay 
-          ];
-          environment.systemPackages = [
-            nixgl.packages.x86_64-linux.nixGLIntel
-          ];
-        }
-      ];
+          }
+        ];
+      };
     };
-  };
 }

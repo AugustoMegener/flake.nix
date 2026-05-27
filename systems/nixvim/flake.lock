@@ -39,19 +39,19 @@
         "type": "github"
       }
     },
-    "gradle-nvim": {
+    "kotlin-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1765362529,
-        "narHash": "sha256-wcUMX9Z1KKkZWs79OnunyGS4yYEeHiiTjtIHUjq1A3k=",
-        "owner": "oclay1st",
-        "repo": "gradle.nvim",
-        "rev": "dac2cdd20cbc55c588bdcda1b4ee6f9b280d9e79",
+        "lastModified": 1779459898,
+        "narHash": "sha256-cyQ6r7niGQd91zNhgyz9qsJNkXYdrUK57xl0IcFGdSE=",
+        "owner": "AlexandrosAlexiou",
+        "repo": "kotlin.nvim",
+        "rev": "7d28c1f3046be4724eec56e54e41e10de4da2abc",
         "type": "github"
       },
       "original": {
-        "owner": "oclay1st",
-        "repo": "gradle.nvim",
+        "owner": "AlexandrosAlexiou",
+        "repo": "kotlin.nvim",
         "type": "github"
       }
     },
@@ -122,12 +122,29 @@
         "type": "github"
       }
     },
+    "nvim-dap-kotlin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729193300,
+        "narHash": "sha256-a2P3USCuK+e2cDixJpS4ZKgqEiRuWfmzGOP+oxoRyJo=",
+        "owner": "Mgenuit",
+        "repo": "nvim-dap-kotlin",
+        "rev": "b78dcea24fb304d7e2f1058683abc5593719cf5e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mgenuit",
+        "repo": "nvim-dap-kotlin",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "gradle-nvim": "gradle-nvim",
+        "kotlin-nvim": "kotlin-nvim",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "nvim-dap-kotlin": "nvim-dap-kotlin"
       }
     },
     "systems": {
