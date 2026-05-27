@@ -1,8 +1,8 @@
-{ pkgs, inputs, ... }:
+{ pkgs, gradle-nvim, inputs, ... }:
 let
   gradlePlugin = pkgs.stdenv.mkDerivation {
     name = "gradle-nvim";
-    src = inputs.gradle-nvim;
+    src = gradle-nvim;
     installPhase = ''
       mkdir -p $out
       cp -r . $out/
