@@ -116,22 +116,6 @@
         "type": "github"
       }
     },
-    "gradle-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1765362529,
-        "narHash": "sha256-wcUMX9Z1KKkZWs79OnunyGS4yYEeHiiTjtIHUjq1A3k=",
-        "owner": "oclay1st",
-        "repo": "gradle.nvim",
-        "rev": "dac2cdd20cbc55c588bdcda1b4ee6f9b280d9e79",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oclay1st",
-        "repo": "gradle.nvim",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
@@ -206,22 +190,6 @@
       "original": {
         "owner": "JPyke3",
         "repo": "hytale-launcher-nix",
-        "type": "github"
-      }
-    },
-    "kotlin-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774030388,
-        "narHash": "sha256-SyYeGwFWCX1zNVV5muzxC6Y3Y6I9V67CNlyEldwj4ck=",
-        "owner": "AlexandrosAlexiou",
-        "repo": "kotlin.nvim",
-        "rev": "262340932602a77ce0be12aab949864a37a756bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AlexandrosAlexiou",
-        "repo": "kotlin.nvim",
         "type": "github"
       }
     },
@@ -423,22 +391,6 @@
         "type": "github"
       }
     },
-    "nvim-dap-kotlin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729193300,
-        "narHash": "sha256-a2P3USCuK+e2cDixJpS4ZKgqEiRuWfmzGOP+oxoRyJo=",
-        "owner": "Mgenuit",
-        "repo": "nvim-dap-kotlin",
-        "rev": "b78dcea24fb304d7e2f1058683abc5593719cf5e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Mgenuit",
-        "repo": "nvim-dap-kotlin",
-        "type": "github"
-      }
-    },
     "quickshell": {
       "inputs": {
         "nixpkgs": [
@@ -464,15 +416,12 @@
         "ags": "ags",
         "astal": "astal_2",
         "elephant": "elephant",
-        "gradle-nvim": "gradle-nvim",
         "home-manager": "home-manager",
         "hyprland-config": "hyprland-config",
         "hytale-launcher": "hytale-launcher",
-        "kotlin-nvim": "kotlin-nvim",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_7",
         "nixvim": "nixvim",
-        "nvim-dap-kotlin": "nvim-dap-kotlin",
         "quickshell": "quickshell",
         "walker": "walker",
         "zen-browser": "zen-browser"
