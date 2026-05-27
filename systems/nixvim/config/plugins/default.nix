@@ -15,7 +15,6 @@
     ./noice
     ./bufferline
     ./trouble
-    ./java
     ./lint
     ./session
     ./cord
