@@ -261,9 +261,9 @@ in
 # and migrated your data accordingly.
 #
 # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.11"; # Did you read the comment?
+  stdenv.hostPlatform.system.stateVersion = "25.11"; # Did you read the comment?
 
-    home-manager.backupFileExtension = "bak";
+  home-manager.backupFileExtension = "bak";
 
   nix.gc = {
     automatic = true;
