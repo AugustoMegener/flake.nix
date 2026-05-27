@@ -14,7 +14,7 @@
     hyprshot
     wl-clipboard
     prismlauncher
-    inputs.ags.packages.${pkgs.system}.agsFull
+    inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.agsFull
     inkscape
     /*inputs.hytale-launcher.packages.x86_64-linux.default*/
   ];
