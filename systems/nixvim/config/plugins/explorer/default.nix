@@ -10,7 +10,7 @@
       ripgrep
   ];
 
-  plugins.eini = {
+  plugins.mini = {
     enable = true;
     modules = {
       files = {
