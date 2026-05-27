@@ -1,5 +1,7 @@
 { pkgs, gradle-nvim, inputs, ... }:
 let
+gradle-nvim = inputs.gradle-nvim;
+
   gradlePlugin = pkgs.stdenv.mkDerivation {
     name = "gradle-nvim";
     src = gradle-nvim;

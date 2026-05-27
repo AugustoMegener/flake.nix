@@ -1,6 +1,4 @@
 {
-  description = "Standalone Nixvim migrated from ~/.config/nixos/home/nvim";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim.url = "github:nix-community/nixvim";
