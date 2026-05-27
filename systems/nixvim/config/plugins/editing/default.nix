@@ -4,6 +4,7 @@
     nvim-surround
     indent-blankline-nvim
     nvim-colorizer-lua
+    auto-save-nvim
   ];
 
   plugins.auto-session = {
