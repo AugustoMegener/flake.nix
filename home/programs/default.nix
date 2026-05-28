@@ -11,5 +11,6 @@
     ./fastfetch.nix
     ./obsidian.nix
     ./zen-browser.nix
+    ./bolchevim.nix
   ];
 }
