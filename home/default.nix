@@ -1,5 +1,5 @@
 {
-  config,
+    config,
     pkgs,
     lib,
     inputs,
@@ -20,16 +20,6 @@
   ];
 
 
-  programs.nixvim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    _module.args.inputs = inputs;
-    imports = [
-      ../systems/nixvim/config
-    ];
-  };
 
   home.username = "kito";
   home.homeDirectory = "/home/kito";

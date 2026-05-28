@@ -20,16 +20,14 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
-
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bolchevim.url = "github:AugustoMegener/bolchevim"; 
   };
 
   outputs =
@@ -56,7 +54,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.kito = import ./home/manager.nix;
+            home-manager.users.kito = import ./home;
           }
           {
             disabledModules = [ "services/misc/elephant.nix" ];
