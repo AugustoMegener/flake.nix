@@ -15,7 +15,6 @@
       ./waybar/config.nix
       inputs.hyprland-config.homeModules.default
       ./swaync/config.nix
-      inputs.nixvim.homeModules.nixvim
       inputs.ags.homeManagerModules.default
   ];
 
