@@ -67,11 +67,26 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
+      "text/html" = ["zen-browser.desktop"];
+      "x-scheme-handler/http" = ["zen-browser.desktop"];
+      "x-scheme-handler/https" = ["zen-browser.desktop"];
+      "x-scheme-handler/about" = ["zen-browser.desktop"];
+      "x-scheme-handler/unknown" = ["zen-browser.desktop"];
       "inode/directory" = [ "yazi-kitty.desktop" ];
       "text/plain" = [ "nvim.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/svg+xml" = [ "org.inkscape.Inkscape.desktop" ];
     };
+  };
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+
+    documents = "${config.home.homeDirectory}/Documents";
+    download = "${config.home.homeDirectory}/Downloads";
+    music = "${config.home.homeDirectory}/Music";
+    pictures = "${config.home.homeDirectory}/Pictures";
+    videos = "${config.home.homeDirectory}/Videos";
   };
   home.packages = [ yazi-kitty ];
 }
