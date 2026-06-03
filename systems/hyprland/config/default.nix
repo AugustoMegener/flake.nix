@@ -11,5 +11,7 @@
     ./input.nix
     ./keybinds.nix
     ./rules.nix
+    ./hyprlock.nix
+    ./hypridle.nix
   ];
 }
