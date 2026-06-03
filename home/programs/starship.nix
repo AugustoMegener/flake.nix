@@ -37,7 +37,7 @@
         [ ](fg:color_bg1)\
         $nix_shell\
         $line_break$character
-      ''
+      '';
 
       palette = "gruvbox_dark";
 
