@@ -14,4 +14,8 @@
     ./hyprlock.nix
     ./hypridle.nix
   ];
+
+  home.packages = with pkgs; [
+    hyprshutdown
+  ];
 }
