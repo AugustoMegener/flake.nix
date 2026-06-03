@@ -80,7 +80,7 @@ in
   };
   xdg.userDirs = {
     enable = true;
-    createDirectories = true;
+    # createDirectories = true;
 
     documents = "$HOME/Documents";
     download = "$HOME/Downloads";

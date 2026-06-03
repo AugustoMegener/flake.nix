@@ -23,9 +23,15 @@ in
 
   services.greetd = {
     enable = true;
-    settings.default_session = {
-      command = "${sessionScript}";
-      user = username;
+    settings = {
+      initial_session = {
+        command = "${sessionScript}";
+        user = username;
+      };
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd start-hyprland";
+        user = "greeter";
+      };
     };
   };
 
