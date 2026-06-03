@@ -82,11 +82,11 @@ in
     enable = true;
     createDirectories = true;
 
-    documents = "${config.home.homeDirectory}/Documents";
-    download = "${config.home.homeDirectory}/Downloads";
-    music = "${config.home.homeDirectory}/Music";
-    pictures = "${config.home.homeDirectory}/Pictures";
-    videos = "${config.home.homeDirectory}/Videos";
+    documents = "$HOME/Documents";
+    download = "$HOME/Downloads";
+    music = "$HOME/Music";
+    pictures = "$HOME/Pictures";
+    videos = "$HOME/Videos";
   };
   home.packages = [ yazi-kitty ];
 }
