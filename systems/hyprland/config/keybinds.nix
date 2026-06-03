@@ -44,7 +44,9 @@
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
-      "$mainMod, Escape, exec, hyprshutdown"
+      "$mod, Escape, exec, hyprshutdown --post-cmd 'systemctl hibernate'"
+      "$mod SHIFT, Escape, exec, hyprshutdown --post-cmd 'systemctl poweroff'"
+      "$mod CTRL, Escape, exec, hyprshutdown --post-cmd 'systemctl reboot'"
     ];
 
     bindm = [
