@@ -173,20 +173,20 @@ in
   };
 
   programs = {
-    /*gamescope = {
+    gamescope = {
       enable = true;
       capSysNice = true;
-    };*/
+    };
     steam.gamescopeSession.enable = true;
   };
 
-  /*specialisation.gamescope.configuration = {
+  specialisation.gamescope.configuration = {
     boot.kernelParams = [ "noresume" ];
-    services.greetd.settings.default_session = {
+    /*services.greetd.settings.default_session = {
       command = "/etc/greetd/gamescope-autologin";
       user = "kito";
-    };
-  };*/
+    };*/
+  };
 
   environment.shells = [ pkgs.zsh ];
   users.defaultUserShell = pkgs.zsh;
