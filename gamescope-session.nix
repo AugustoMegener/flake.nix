@@ -10,7 +10,7 @@ let
       sudo /etc/gamescope-set-default "@saved"
       systemctl reboot
     else
-      exec start-hyprland
+      exec ${lib.getExe config.programs.hyprland.package}
     fi
   '';
 in
