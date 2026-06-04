@@ -2,12 +2,12 @@
 let
   username = "kito";
   gameFile = "/home/${username}/.local/share/gamescope-boot/next-game";
+
   sessionScript = pkgs.writeShellScript "greetd-session" ''
     if [ -f "${gameFile}" ] && grep -q noresume /proc/cmdline; then
       GAME=$(cat "${gameFile}")
       rm "${gameFile}"
       ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -e -- $GAME || true
-      sudo /etc/gamescope-set-default "@saved"
       systemctl reboot
     else
       exec ${lib.getExe config.programs.hyprland.package}
@@ -43,36 +43,45 @@ in
     );
   };
 
-  environment.etc."gamescope-set-default" = {
-    mode = "0755";
-    text = ''
-      #!/usr/bin/env bash
-      sed -i "s/^default .*/default $1/" /boot/loader/loader.conf
-    '';
-  };
-
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "game-launch" ''
+      set -euo pipefail
+
       if [ $# -eq 0 ]; then
         echo "uso: game-launch <binário> [args...]" >&2
         exit 1
       fi
 
+      ENTRY_FILE=$(ls /boot/loader/entries/ \
+        | grep "specialisation-gamescope" \
+        | sort -V | tail -1)
+      ENTRY_PATH="/boot/loader/entries/$ENTRY_FILE"
+
+      LINUX=$(grep "^linux " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
+      INITRD=$(grep "^initrd " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
+      OPTIONS=$(grep "^options " "$ENTRY_PATH" | sed 's/^options //')
+
+      OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        | grep "NixOS Gamescope" \
+        | grep -o 'Boot[0-9A-F]*' \
+        | sed 's/Boot//' || true)
+      [ -n "$OLD" ] && sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        --delete-bootnum --bootnum "$OLD" > /dev/null
+
+      NEW=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+  --create --disk /dev/sda --part 1 \
+  --label "NixOS Gamescope" \
+  --loader "$LINUX" \
+  --unicode "initrd=$INITRD $OPTIONS" \
+  | grep "NixOS Gamescope" \
+  | grep -o 'Boot[0-9A-F]\{4\}' \
+  | sed 's/Boot//')
+
+      sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootnext "$NEW" > /dev/null
+
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
 
-      ENTRY=$(ls /boot/loader/entries/ 2>/dev/null \
-        | grep "specialisation-gamescope" \
-        | sort -V | tail -1 \
-        | sed 's/\.conf$//')
-
-      if [ -z "$ENTRY" ]; then
-        rm "${gameFile}"
-        echo "erro: entrada gamescope não encontrada" >&2
-        exit 1
-      fi
-
-      sudo /etc/gamescope-set-default "$ENTRY"
       systemctl hibernate
     '')
   ];
@@ -81,11 +90,7 @@ in
     users = [ username ];
     commands = [
       {
-        command = "${pkgs.systemd}/bin/bootctl";
-        options = [ "NOPASSWD" ];
-      }
-      {
-        command = "/etc/gamescope-set-default";
+        command = "${pkgs.efibootmgr}/bin/efibootmgr";
         options = [ "NOPASSWD" ];
       }
     ];
