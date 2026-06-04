@@ -6,6 +6,7 @@ cd ~/System/
 
 git add .
 git commit -m "nixos rebuild: switch"
+git push
 
 sudo nixos-rebuild "$MODE" --flake ~/System#PrimaryOS
 

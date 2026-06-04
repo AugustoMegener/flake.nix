@@ -96,7 +96,7 @@ truncation_symbol = "…/"
 "Fotos" = " "
 "Developer" = "󰲋 "
 ".config"=" "
-"nixos"=" "
+"System"=" "
 "Vault"=" "
 
 [git_branch]
