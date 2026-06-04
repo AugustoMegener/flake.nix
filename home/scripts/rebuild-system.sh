@@ -2,10 +2,17 @@
 
 MODE=${1:-test}
 
+while getopts "m:" opt; do
+  case "$opt" in
+    m) message="$OPTARG" ;;
+    *) exit 1 ;;
+  esac
+done
+
 cd ~/System/
 
 git add .
-git commit -m "nixos rebuild: switch"
+git commit -m $message
 git push
 
 sudo nixos-rebuild "$MODE" --flake ~/System#PrimaryOS
