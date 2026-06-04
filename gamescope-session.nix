@@ -1,14 +1,13 @@
 { config, pkgs, lib, ... }:
-
 let
   username = "kito";
   gameFile = "/home/${username}/.local/share/gamescope-boot/next-game";
-
   sessionScript = pkgs.writeShellScript "greetd-session" ''
     if [ -f "${gameFile}" ] && grep -q noresume /proc/cmdline; then
       GAME=$(cat "${gameFile}")
       rm "${gameFile}"
       ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -e -- $GAME || true
+      sudo /etc/gamescope-set-default "@saved"
       systemctl reboot
     else
       exec start-hyprland
@@ -44,6 +43,14 @@ in
     );
   };
 
+  environment.etc."gamescope-set-default" = {
+    mode = "0755";
+    text = ''
+      #!/usr/bin/env bash
+      sed -i "s/^default .*/default $1/" /boot/loader/loader.conf
+    '';
+  };
+
   environment.systemPackages = [
     (pkgs.writeShellScriptBin "game-launch" ''
       if [ $# -eq 0 ]; then
@@ -61,20 +68,26 @@ in
 
       if [ -z "$ENTRY" ]; then
         rm "${gameFile}"
-        echo "erro: entrada gamescope não encontrada em /boot/loader/entries/" >&2
+        echo "erro: entrada gamescope não encontrada" >&2
         exit 1
       fi
 
-      sudo ${pkgs.systemd}/bin/bootctl set-oneshot "$ENTRY"
+      sudo /etc/gamescope-set-default "$ENTRY"
       systemctl hibernate
     '')
   ];
 
   security.sudo.extraRules = [{
     users = [ username ];
-    commands = [{
-      command = "${pkgs.systemd}/bin/bootctl";
-      options = [ "NOPASSWD" ];
-    }];
+    commands = [
+      {
+        command = "${pkgs.systemd}/bin/bootctl";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/etc/gamescope-set-default";
+        options = [ "NOPASSWD" ];
+      }
+    ];
   }];
 }
