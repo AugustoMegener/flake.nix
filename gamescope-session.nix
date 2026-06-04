@@ -8,6 +8,7 @@ let
       GAME=$(cat "${gameFile}")
       rm "${gameFile}"
       ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -e -- $GAME || true
+      sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder 0001,000F,000E,0009
       systemctl reboot
     else
       exec ${lib.getExe config.programs.hyprland.package}
@@ -44,6 +45,7 @@ in
   };
 
   environment.systemPackages = [
+    pkgs.efibootmgr
     (pkgs.writeShellScriptBin "game-launch" ''
       set -euo pipefail
 
@@ -63,21 +65,19 @@ in
 
       OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
         | grep "NixOS Gamescope" \
-        | grep -o 'Boot[0-9A-F]*' \
+        | grep -o 'Boot[0-9A-F]\{4\}' \
         | sed 's/Boot//' || true)
       [ -n "$OLD" ] && sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --delete-bootnum --bootnum "$OLD" > /dev/null
+        --delete-bootnum "$OLD" > /dev/null
 
-      NEW=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-  --create --disk /dev/sda --part 1 \
-  --label "NixOS Gamescope" \
-  --loader "$LINUX" \
-  --unicode "initrd=$INITRD $OPTIONS" \
-  | grep "NixOS Gamescope" \
-  | grep -o 'Boot[0-9A-F]\{4\}' \
-  | sed 's/Boot//')
+      sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        --create --disk /dev/sda --part 1 \
+        --label "NixOS Gamescope" \
+        --loader "$LINUX" \
+        --unicode "initrd=$INITRD $OPTIONS" > /dev/null
 
-      sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootnext "$NEW" > /dev/null
+      sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        --bootorder 0000,0001,000F,000E,0009 > /dev/null
 
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
