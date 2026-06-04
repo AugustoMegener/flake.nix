@@ -18,6 +18,7 @@
     permission = .*/hyprpm, plugin, allow
     permission = .*/hyprshot, screencopy, allow
     permission = .*/hypridle, screencopy, allow
+    permission = .*/hyplock, screencopy, allow
     permission = .*/hyprpicker, screencopy, allow
   '';
 }
