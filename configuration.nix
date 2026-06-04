@@ -118,6 +118,7 @@ in
       "wheel"
     ];
     packages = with pkgs; [
+      efibootmgr
       tree
     ];
   };
