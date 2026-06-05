@@ -8,7 +8,25 @@ let
       GAME=$(cat "${gameFile}")
       rm "${gameFile}"
       ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -- $GAME || true
-      sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder 0001,000F,000E,0009
+
+      GAMESCOPE_NUM=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        | grep "NixOS Gamescope" \
+        | grep -o 'Boot[0-9A-F]\{4\}' \
+        | sed 's/Boot//' \
+        | tr -d '[:space:]') || GAMESCOPE_NUM=""
+
+      CURRENT_ORDER=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        | grep "^BootOrder:" \
+        | sed 's/BootOrder: //')
+
+      if [ -n "$GAMESCOPE_NUM" ]; then
+        NEW_ORDER=$(echo "$CURRENT_ORDER" \
+          | sed "s/${GAMESCOPE_NUM},//g" \
+          | sed "s/,${GAMESCOPE_NUM}//g" \
+          | sed "s/^${GAMESCOPE_NUM}$//g")
+        sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder "$NEW_ORDER" > /dev/null
+      fi
+
       systemctl reboot
     else
       exec ${lib.getExe config.programs.hyprland.package}
@@ -63,26 +81,28 @@ in
       INITRD=$(grep "^initrd " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
       OPTIONS=$(grep "^options " "$ENTRY_PATH" | sed 's/^options //')
 
-OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-  | grep "NixOS Gamescope" \
-  | grep -o 'Boot[0-9A-F]\{4\}' \
-  | sed 's/Boot//' \
-  | tr -d '[:space:]') || OLD=""
+      OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+        | grep "NixOS Gamescope" \
+        | grep -o 'Boot[0-9A-F]\{4\}' \
+        | sed 's/Boot//' \
+        | tr -d '[:space:]') || OLD=""
 
-echo "DEBUG OLD='$OLD'"
+      if [ -n "$OLD" ]; then
+        sudo ${pkgs.efibootmgr}/bin/efibootmgr -b "$OLD" -B > /dev/null
+      fi
 
-if [ -n "$OLD" ]; then
-sudo ${pkgs.efibootmgr}/bin/efibootmgr -b "$OLD" -B > /dev/null
-
-fi
-      sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+      NEW=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
         --create --disk /dev/sda --part 1 \
         --label "NixOS Gamescope" \
         --loader "$LINUX" \
-        --unicode "initrd=$INITRD $OPTIONS" > /dev/null
+        --unicode "initrd=$INITRD $OPTIONS" \
+        | grep "NixOS Gamescope" \
+        | grep -o 'Boot[0-9A-F]\{4\}' \
+        | sed 's/Boot//' \
+        | tr -d '[:space:]')
 
       sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --bootorder 0000,0001,000F,000E,0009 > /dev/null
+        --bootorder "${NEW},0001,000F,000E,0009" > /dev/null
 
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
@@ -101,3 +121,4 @@ fi
     ];
   }];
 }
+
