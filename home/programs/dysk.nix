@@ -1,4 +1,6 @@
-{ ... }:
+{ config, pkgs, ... }:
 {
-  programs.dysk.enable = true;
+  home.packages = with pkgs; [
+    dysk
+  ];
 }
