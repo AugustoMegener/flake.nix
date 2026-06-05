@@ -9,7 +9,7 @@
       "$mainMod SHIFT, V, exec, walker -m clipboard"
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
-      "$mainMod, E, exec, kitty -- sh -c 'TMUX_TMPDIR=$XDG_RUNTIME_DIR tmux kill-session -t yazi 2>/dev/null; sleep 0.1; TMUX_TMPDIR=$XDG_RUNTIME_DIR tmux new-session -s yazi \"zsh -ic \\\"cd ~ && y; exec zsh\\\"\"'"
+      "$mainMod, E, exec, kitty -- zsh -c 'init-yazi'"
       "$mainMod, V, togglefloating,"
       "$mainMod, Z, exec, walker"
       "$mainMod, P, pseudo,"

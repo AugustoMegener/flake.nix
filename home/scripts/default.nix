@@ -6,6 +6,7 @@ let
   tmux-next-session = pkgs.writeShellScriptBin "tmux-next-session" (builtins.readFile ./tmux-next-session.sh);
   launcher-wrapper = pkgs.writeShellScriptBin "launcher-wrapper" (builtins.readFile ./launcher-wrapper.sh);
   init-tmux = pkgs.writeShellScriptBin "init-tmux" (builtins.readFile ./init-tmux.sh);
+  init-yazi = pkgs.writeShellScriptBin "init-yazi" (builtins.readFile ./init-yazi.sh);
 in
 {
   home.packages = [
@@ -15,5 +16,6 @@ in
     tmux-next-session
     launcher-wrapper
     init-tmux
+    init-yazi
   ];
 }
