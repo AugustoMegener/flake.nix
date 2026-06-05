@@ -6,6 +6,10 @@ if [[ -z "$tmux" && "$term" != "dumb" && -z "$zsh_execution_string" ]]; then
   if [[ -n "$target" ]]; then
     tmux attach-session -t "$target"
   else
-    tmux new-session -s "$(tmux-next-session)" "$cmd"
+    if [[ -n "$cmd" ]]; then
+      tmux new-session -s "$(tmux-next-session)" "$cmd"
+    else
+      tmux new-session -s "$(tmux-next-session)"
+    fi
   fi
 fi
