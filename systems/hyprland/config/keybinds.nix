@@ -4,12 +4,12 @@
     "$mainMod" = "SUPER";
 
     bind = [
-      "$mainMod, Q, exec, kitty -- init-tmux"
+      "$mainMod, Q, exec, kitty zsh -ic 'source init-tmux'"
       "$mainMod, W, exec, zen-beta"
       "$mainMod SHIFT, V, exec, walker -m clipboard"
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
-      "$mainMod, E, exec, kitty zsh -ic 'source init-tmux'"
+      "$mainMod, E, exec, kitty -- sh -c 'TMUX_TMPDIR=$XDG_RUNTIME_DIR tmux kill-session -t yazi 2>/dev/null; sleep 0.1; TMUX_TMPDIR=$XDG_RUNTIME_DIR tmux new-session -s yazi \"zsh -ic \\\"cd ~ && y; exec zsh\\\"\"'"
       "$mainMod, V, togglefloating,"
       "$mainMod, Z, exec, walker"
       "$mainMod, P, pseudo,"
