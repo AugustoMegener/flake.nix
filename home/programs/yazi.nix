@@ -1,21 +1,81 @@
 { pkgs, ... }:
 let
 yaziEdit = pkgs.writeShellScript "yazi-edit" ''
-  #!/bin/bash
-
   FILE=$(realpath "$@")
-
   if [[ -d "$FILE" ]]; then
     DIR="$FILE"
+    TARGET="$FILE"
+    MODE="dir"
   else
     DIR=$(dirname "$FILE")
+    TARGET="$FILE"
+    MODE="file"
   fi
 
-  if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-    exec nix develop "$DIR" -c zsh -ic "$EDITOR '$FILE'"
+  find_nvim_pid() {
+    local pane_pid=$1
+    local children
+    children=$(pgrep -P "$pane_pid" 2>/dev/null)
+    for child in $children; do
+      local name
+      name=$(ps -p "$child" -o comm= 2>/dev/null)
+      if [[ "$name" == "nvim" ]]; then
+        echo "$child"
+        return
+      fi
+      local found
+      found=$(find_nvim_pid "$child")
+      if [[ -n "$found" ]]; then
+        echo "$found"
+        return
+      fi
+    done
+  }
+
+  find_session() {
+    local current_session
+    current_session=$(tmux display-message -p '#S' 2>/dev/null)
+
+    while IFS=' ' read -r session pane_pid; do
+      [[ "$session" == "$current_session" ]] && continue
+
+      local nvim_pid
+      nvim_pid=$(find_nvim_pid "$pane_pid")
+      [[ -z "$nvim_pid" ]] && continue
+
+      local socket
+      socket=$(ls /run/user/$UID/nvim.$nvim_pid.* 2>/dev/null | head -1)
+      [[ -z "$socket" ]] && continue
+
+      if [[ "$MODE" == "file" ]]; then
+        local open_file
+        open_file=$(nvim --server "$socket" --remote-expr 'expand("%:p")' 2>/dev/null)
+        [[ "$open_file" == "$TARGET" ]] && echo "$session" && return
+      else
+        local cwd
+        cwd=$(nvim --server "$socket" --remote-expr 'getcwd()' 2>/dev/null)
+        [[ "$cwd" == "$TARGET" ]] && echo "$session" && return
+      fi
+    done < <(tmux list-panes -aF '#{session_name} #{pane_pid}' 2>/dev/null)
+  }
+
+  open_in_current() {
+    if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+      exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
+    else
+      exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
+    fi
+  }
+
+  if [[ -n "$TMUX" ]]; then
+    target_session=$(find_session)
+    if [[ -n "$target_session" ]]; then
+      exec tmux switch-client -t "$target_session"
+    else
+      open_in_current
+    fi
   else
-    cd "$DIR"
-    exec $EDITOR "$FILE"
+    open_in_current
   fi
 '';
 in
