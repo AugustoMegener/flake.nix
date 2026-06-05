@@ -72,9 +72,9 @@ OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
 echo "DEBUG OLD='$OLD'"
 
 if [ -n "$OLD" ]; then
-  sudo ${pkgs.efibootmgr}/bin/efibootmgr --delete-bootnum "$OLD" > /dev/null
-fi
+sudo ${pkgs.efibootmgr}/bin/efibootmgr -b "$OLD" -B > /dev/null
 
+fi
       sudo ${pkgs.efibootmgr}/bin/efibootmgr \
         --create --disk /dev/sda --part 1 \
         --label "NixOS Gamescope" \
