@@ -13,5 +13,6 @@
     ./zen-browser.nix
     ./bolchevim.nix
     ./fzf.nix
+    ./zoxide.nix
   ];
 }
