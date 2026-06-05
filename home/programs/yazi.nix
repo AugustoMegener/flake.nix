@@ -1,24 +1,23 @@
 { pkgs, ... }:
 let
-  yaziEdit = pkgs.writeShellScript "yazi-edit" ''
-    #!/bin/bash
+yaziEdit = pkgs.writeShellScript "yazi-edit" ''
+  #!/bin/bash
 
-    FILE=$(realpath "$@")
-    CLIENT=$(tmux display-message -p -t "$TMUX_PANE" '#{client_name}')
-    RETURN=$(tmux display-message -p -t "$TMUX_PANE" '#{session_name}')
+  FILE=$(realpath "$@")
 
-    if [[ -d "$FILE" ]]; then
-      DIR="$FILE"
-    else
-      DIR=$(dirname "$FILE")
-    fi
+  if [[ -d "$FILE" ]]; then
+    DIR="$FILE"
+  else
+    DIR=$(dirname "$FILE")
+  fi
 
-    if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-      tmux send-keys -t "$TMUX_PANE" "nix develop '$DIR' -c zsh -ic \"$EDITOR '$FILE'\"" C-m
-    else
-      tmux send-keys -t "$TMUX_PANE" "cd '$DIR' && $EDITOR '$FILE'" C-m
-    fi
-  '';
+  if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+    exec nix develop "$DIR" -c zsh -ic "$EDITOR '$FILE'"
+  else
+    cd "$DIR"
+    exec $EDITOR "$FILE"
+  fi
+'';
 in
 {
   programs.yazi = {
