@@ -106,8 +106,11 @@ in
 
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
+      
+      echo "NEW='$NEW'"
+sudo ${pkgs.efibootmgr}/bin/efibootmgr | grep -i "bootorder\|gamescope"
+systemctl hibernate
 
-      systemctl hibernate
     '')
   ];
 
