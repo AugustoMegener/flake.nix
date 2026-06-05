@@ -21,9 +21,9 @@ let
 
       if [ -n "$GAMESCOPE_NUM" ]; then
         NEW_ORDER=$(echo "$CURRENT_ORDER" \
-          | sed "s/${GAMESCOPE_NUM},//g" \
-          | sed "s/,${GAMESCOPE_NUM}//g" \
-          | sed "s/^${GAMESCOPE_NUM}$//g")
+          | sed "s/''${GAMESCOPE_NUM},//g" \
+          | sed "s/,''${GAMESCOPE_NUM}//g" \
+          | sed "s/^''${GAMESCOPE_NUM}$//g")
         sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder "$NEW_ORDER" > /dev/null
       fi
 
@@ -102,7 +102,7 @@ in
         | tr -d '[:space:]')
 
       sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --bootorder "${NEW},0001,000F,000E,0009" > /dev/null
+        --bootorder "''${NEW},0001,000F,000E,0009" > /dev/null
 
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
@@ -121,4 +121,3 @@ in
     ];
   }];
 }
-
