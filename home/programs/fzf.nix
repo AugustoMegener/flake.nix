@@ -11,5 +11,6 @@
       "--color=marker:#4396b7,spinner:#da9a22,header:#a89984,border:#d5bea1"
       "--color=gutter:#3c3836"
     ];
+    enableZshIntegration = true; 
   };
 }
