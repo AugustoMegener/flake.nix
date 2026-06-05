@@ -64,9 +64,10 @@ in
       OPTIONS=$(grep "^options " "$ENTRY_PATH" | sed 's/^options //')
 
       OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        | grep "NixOS Gamescope" \
-        | grep -o 'Boot[0-9A-F]\{4\}' \
-        | sed 's/Boot//' || true)
+  | grep "NixOS Gamescope" \
+  | grep -o 'Boot[0-9A-F]\{4\}' \
+  | sed 's/Boot//' \
+  | tr -d '[:space:]' || true)
       [ -n "$OLD" ] && sudo ${pkgs.efibootmgr}/bin/efibootmgr \
         --delete-bootnum "$OLD" > /dev/null
 
