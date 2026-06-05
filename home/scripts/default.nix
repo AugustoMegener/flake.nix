@@ -5,6 +5,7 @@ let
   hyprfloat-kitty = pkgs.writeShellScriptBin "hyprfloat-kitty" (builtins.readFile ./hyprfloat-kitty.sh);
   tmux-next-session = pkgs.writeShellScriptBin "tmux-next-session" (builtins.readFile ./tmux-next-session.sh);
   launcher-wrapper = pkgs.writeShellScriptBin "launcher-wrapper" (builtins.readFile ./launcher-wrapper.sh);
+  init-tmux = pkgs.writeShellScriptBin "init-tmux" (builtins.readFile ./init-tmux.sh);
 in
 {
   home.packages = [
@@ -13,5 +14,6 @@ in
     hyprfloat-kitty
     tmux-next-session
     launcher-wrapper
+    init-tmux
   ];
 }

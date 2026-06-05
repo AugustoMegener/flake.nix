@@ -22,7 +22,7 @@ let
 
       systemctl reboot
     else
-      exec ${lib.getExe config.programs.hyprland.package}
+      exec start-hyprland
     fi
   '';
 in

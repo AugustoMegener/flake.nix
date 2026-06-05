@@ -4,7 +4,7 @@
     "$mainMod" = "SUPER";
 
     bind = [
-      "$mainMod, Q, exec, kitty"
+      "$mainMod, Q, exec, kitty -- init-tmux"
       "$mainMod, W, exec, zen-beta"
       "$mainMod SHIFT, V, exec, walker -m clipboard"
       "$mainMod, C, killactive,"
