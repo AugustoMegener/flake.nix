@@ -36,6 +36,7 @@
       set -g status-left "#[fg=#da9a22,bg=#302b24]#[bg=#da9a22,fg=#302b24,bold]#S#[fg=#da9a22,bg=#302b24] "
 
       set -g status-right "#[fg=#4396b7,bg=#302b24]#[bg=#4396b7,fg=#302b24,bold]#h#[fg=#4396b7,bg=#302b24]"
+      set -g mouse on
     '';
   };
 }
