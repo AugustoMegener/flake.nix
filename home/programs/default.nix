@@ -14,5 +14,6 @@
     ./bolchevim.nix
     ./fzf.nix
     ./zoxide.nix
+    ./dysc.nix
   ];
 }
