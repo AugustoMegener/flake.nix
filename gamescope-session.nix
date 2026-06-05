@@ -2,6 +2,7 @@
 let
   username = "kito";
   gameFile = "/home/${username}/.local/share/gamescope-boot/next-game";
+  backupFile = "/boot/loader/entries/.nixos-normal-options.bak";
 
   sessionScript = pkgs.writeShellScript "greetd-session" ''
     if [ -f "${gameFile}" ] && grep -q noresume /proc/cmdline; then
@@ -9,22 +10,14 @@ let
       rm "${gameFile}"
       ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -- $GAME || true
 
-      GAMESCOPE_NUM=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        | grep "NixOS Gamescope" \
-        | grep -o 'Boot[0-9A-F]\{4\}' \
-        | sed 's/Boot//' \
-        | tr -d '[:space:]') || GAMESCOPE_NUM=""
+      CURRENT_ENTRY=$(ls /boot/loader/entries/ \
+        | grep -v specialisation \
+        | grep "^nixos" \
+        | sort -V | tail -1)
 
-      CURRENT_ORDER=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        | grep "^BootOrder:" \
-        | sed 's/BootOrder: //')
-
-      if [ -n "$GAMESCOPE_NUM" ]; then
-        NEW_ORDER=$(echo "$CURRENT_ORDER" \
-          | sed "s/''${GAMESCOPE_NUM},//g" \
-          | sed "s/,''${GAMESCOPE_NUM}//g" \
-          | sed "s/^''${GAMESCOPE_NUM}$//g")
-        sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder "$NEW_ORDER" > /dev/null
+      if [ -f "${backupFile}" ]; then
+        sudo cp "${backupFile}" "/boot/loader/entries/$CURRENT_ENTRY"
+        sudo rm "${backupFile}"
       fi
 
       systemctl reboot
@@ -72,45 +65,31 @@ in
         exit 1
       fi
 
-      ENTRY_FILE=$(ls /boot/loader/entries/ \
+      CURRENT_ENTRY=$(ls /boot/loader/entries/ \
+        | grep -v specialisation \
+        | grep "^nixos" \
+        | sort -V | tail -1)
+
+      GAMESCOPE_ENTRY=$(ls /boot/loader/entries/ \
         | grep "specialisation-gamescope" \
         | sort -V | tail -1)
-      ENTRY_PATH="/boot/loader/entries/$ENTRY_FILE"
 
-      LINUX=$(grep "^linux " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
-      INITRD=$(grep "^initrd " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
-      OPTIONS=$(grep "^options " "$ENTRY_PATH" | sed 's/^options //')
+      CURRENT_PATH="/boot/loader/entries/$CURRENT_ENTRY"
+      GAMESCOPE_PATH="/boot/loader/entries/$GAMESCOPE_ENTRY"
 
-      OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        | grep "NixOS Gamescope" \
-        | grep -o 'Boot[0-9A-F]\{4\}' \
-        | sed 's/Boot//' \
-        | tr -d '[:space:]') || OLD=""
+      GAMESCOPE_INIT=$(grep "^options" "$GAMESCOPE_PATH" | grep -o 'init=[^ ]*')
+      GAMESCOPE_OPTIONS=$(grep "^options" "$GAMESCOPE_PATH" | sed 's/^options //')
 
-      if [ -n "$OLD" ]; then
-        sudo ${pkgs.efibootmgr}/bin/efibootmgr -b "$OLD" -B > /dev/null
-      fi
+      sudo cp "$CURRENT_PATH" "${backupFile}"
 
-      NEW=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --create --disk /dev/sda --part 1 \
-        --label "NixOS Gamescope" \
-        --loader "$LINUX" \
-        --unicode "initrd=$INITRD $OPTIONS" \
-        | grep "NixOS Gamescope" \
-        | grep -o 'Boot[0-9A-F]\{4\}' \
-        | sed 's/Boot//' \
-        | tr -d '[:space:]')
-
-      sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --bootorder "''${NEW},0001,000F,000E,0009" > /dev/null
+      sudo ${pkgs.gnused}/bin/sed -i \
+        "s|^options .*|options $GAMESCOPE_OPTIONS|" \
+        "$CURRENT_PATH"
 
       mkdir -p "$(dirname "${gameFile}")"
       echo "$*" > "${gameFile}"
-      
-      echo "NEW='$NEW'"
-sudo ${pkgs.efibootmgr}/bin/efibootmgr | grep -i "bootorder\|gamescope"
-systemctl hibernate
 
+      systemctl hibernate
     '')
   ];
 
@@ -119,6 +98,18 @@ systemctl hibernate
     commands = [
       {
         command = "${pkgs.efibootmgr}/bin/efibootmgr";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "${pkgs.coreutils}/bin/cp";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "${pkgs.coreutils}/bin/rm";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "${pkgs.gnused}/bin/sed";
         options = [ "NOPASSWD" ];
       }
     ];
