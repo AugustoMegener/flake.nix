@@ -12,5 +12,6 @@
     ./obsidian.nix
     ./zen-browser.nix
     ./bolchevim.nix
+    ./fzf.nix
   ];
 }
