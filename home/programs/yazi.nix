@@ -17,9 +17,10 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
     local children
     children=$(pgrep -P "$pane_pid" 2>/dev/null)
     for child in $children; do
-      local name
+      local name cmd
       name=$(ps -p "$child" -o comm= 2>/dev/null)
-      if [[ "$name" == "nvim" ]]; then
+      cmd=$(ps -p "$child" -o cmd= 2>/dev/null)
+      if [[ "$name" == "nvim" ]] && [[ "$cmd" != *"--embed"* ]]; then
         echo "$child"
         return
       fi
@@ -30,6 +31,19 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
         return
       fi
     done
+  }
+
+  nvim_target() {
+    local pid=$1
+    local cmdline
+    cmdline=$(cat /proc/$pid/cmdline 2>/dev/null | tr '\0' '\n')
+    local last_path
+    last_path=$(echo "$cmdline" | grep -E '^/' | grep -v '^/nix/store' | tail -1)
+    if [[ -n "$last_path" ]]; then
+      echo "$last_path"
+    else
+      readlink /proc/$pid/cwd 2>/dev/null
+    fi
   }
 
   find_session() {
@@ -43,17 +57,15 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
       nvim_pid=$(find_nvim_pid "$pane_pid")
       [[ -z "$nvim_pid" ]] && continue
 
-      local socket
-      socket=$(ls /run/user/$UID/nvim.$nvim_pid.* 2>/dev/null | head -1)
-      [[ -z "$socket" ]] && continue
+      local open_target
+      open_target=$(nvim_target "$nvim_pid")
+      [[ -z "$open_target" ]] && continue
 
       if [[ "$MODE" == "file" ]]; then
-        local open_file
-        open_file=$(nvim --server "$socket" --remote-expr 'expand("%:p")' 2>/dev/null)
-        [[ "$open_file" == "$TARGET" ]] && echo "$session" && return
+        [[ "$open_target" == "$TARGET" ]] && echo "$session" && return
       else
         local cwd
-        cwd=$(nvim --server "$socket" --remote-expr 'getcwd()' 2>/dev/null)
+        cwd=$(readlink /proc/$nvim_pid/cwd 2>/dev/null)
         [[ "$cwd" == "$TARGET" ]] && echo "$session" && return
       fi
     done < <(tmux list-panes -aF '#{session_name} #{pane_pid}' 2>/dev/null)
