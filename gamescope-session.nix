@@ -7,7 +7,7 @@ let
     if [ -f "${gameFile}" ] && grep -q noresume /proc/cmdline; then
       GAME=$(cat "${gameFile}")
       rm "${gameFile}"
-      ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -e -- $GAME || true
+      ${lib.getExe pkgs.gamescope} -W 1920 -H 1080 -f -- $GAME || true
       sudo ${pkgs.efibootmgr}/bin/efibootmgr --bootorder 0001,000F,000E,0009
       systemctl reboot
     else
