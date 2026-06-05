@@ -15,5 +15,6 @@
     ./fzf.nix
     ./zoxide.nix
     ./dysk.nix
+    ./bat.nix
   ];
 }
