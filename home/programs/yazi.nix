@@ -2,6 +2,7 @@
 let
   yaziEdit = pkgs.writeShellScript "yazi-edit" ''
     #!/bin/bash
+
     FILE=$(realpath "$@")
     CLIENT=$(tmux display-message -p -t "$TMUX_PANE" '#{client_name}')
     RETURN=$(tmux display-message -p -t "$TMUX_PANE" '#{session_name}')
@@ -13,21 +14,9 @@ let
     fi
 
     if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-      SHELL_CMD="nix develop '$DIR' -c zsh -c \"$EDITOR '$FILE'; tmux switch-client -c '$CLIENT' -t '$RETURN'; tmux kill-session -t '$SESSION'\""
+      tmux send-keys -t "$TMUX_PANE" "nix develop '$DIR' -c zsh -ic \"$EDITOR '$FILE'\"" C-m
     else
-      SHELL_CMD="zsh -c \"cd '$DIR' && $EDITOR '$FILE'; tmux switch-client -c '$CLIENT' -t '$RETURN'; tmux kill-session -t '$SESSION'\""
-    fi
-
-    EXISTING=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | while read s; do
-      tmux show-environment -t "$s" YAZI_FILE 2>/dev/null | grep -qF "YAZI_FILE=$FILE" && echo "$s"
-    done)
-
-    if [[ -n "$EXISTING" ]]; then
-      tmux switch-client -c "$CLIENT" -t "$EXISTING"
-    else
-      SESSION=$(tmux-next-session)
-      tmux new-session -d -s "$SESSION" -c "$DIR" -e "YAZI_FILE=$FILE" "$SHELL_CMD"
-      tmux switch-client -c "$CLIENT" -t "$SESSION"
+      tmux send-keys -t "$TMUX_PANE" "cd '$DIR' && $EDITOR '$FILE'" C-m
     fi
   '';
 in
