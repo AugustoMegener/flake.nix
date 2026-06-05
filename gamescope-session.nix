@@ -29,7 +29,7 @@ in
         user = username;
       };
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --cmd start-hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --cmd start-hyprland";
         user = "greeter";
       };
     };
@@ -63,13 +63,15 @@ in
       INITRD=$(grep "^initrd " "$ENTRY_PATH" | awk '{print $2}' | tr '/' '\\')
       OPTIONS=$(grep "^options " "$ENTRY_PATH" | sed 's/^options //')
 
-      OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
+OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
   | grep "NixOS Gamescope" \
   | grep -o 'Boot[0-9A-F]\{4\}' \
   | sed 's/Boot//' \
-  | tr -d '[:space:]' || true)
-      [ -n "$OLD" ] && sudo ${pkgs.efibootmgr}/bin/efibootmgr \
-        --delete-bootnum "$OLD" > /dev/null
+  | tr -d '[:space:]') || OLD=""
+
+if [ -n "$OLD" ]; then
+  sudo ${pkgs.efibootmgr}/bin/efibootmgr --delete-bootnum "$OLD" > /dev/null
+fi
 
       sudo ${pkgs.efibootmgr}/bin/efibootmgr \
         --create --disk /dev/sda --part 1 \
