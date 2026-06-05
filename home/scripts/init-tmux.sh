@@ -7,4 +7,4 @@ if [[ -z "$tmux" && "$term" != "dumb" && -z "$zsh_execution_string" ]]; then
     tmux attach-session -t "$target"
   else
     if [[ -n "$cmd" ]]; then
-      tmux new-session -s "$(tmux-next-session)" "$cmd; exec zs
+      tmux new-session -s "$(tmux-next-session)" "$cmd; exec zs"
