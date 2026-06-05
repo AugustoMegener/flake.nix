@@ -69,6 +69,8 @@ OLD=$(sudo ${pkgs.efibootmgr}/bin/efibootmgr \
   | sed 's/Boot//' \
   | tr -d '[:space:]') || OLD=""
 
+echo "DEBUG OLD='$OLD'"
+
 if [ -n "$OLD" ]; then
   sudo ${pkgs.efibootmgr}/bin/efibootmgr --delete-bootnum "$OLD" > /dev/null
 fi
