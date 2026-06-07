@@ -39,7 +39,7 @@ programs.hyprlock = {
         position = "0, 100";
         halign = "center";
         valign = "center";
-        color = "rgb(213, 190, 161)";
+        color = "#2b2622"; #rgb(213, 190, 161)";
       }
     ];
   };
