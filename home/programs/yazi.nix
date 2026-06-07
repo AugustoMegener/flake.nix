@@ -81,7 +81,14 @@ tmux_chdir() {
   width=$(tmux display -p '#{window_width}')
   height=$(tmux display -p '#{window_height}')
   tmux new-session -d -s "$tmp_session" -x "$width" -y "$height"
-  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux kill-session -t '$tmp_session'" Enter
+  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
+  (
+    while tmux list-clients -t "$tmp_session" 2>/dev/null | grep -q .; do
+      sleep 0.05
+    done
+    tmux kill-session -t "$tmp_session" 2>/dev/null
+  ) &
+  disown
 }
 
   open_in_current() {
