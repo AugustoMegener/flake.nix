@@ -77,17 +77,8 @@ tmux_chdir() {
   curr_session=$(tmux display -p '#S')
   local tmp_session
   tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
-  echo "curr=$curr_session tmp=$tmp_session" >> /tmp/yaziedit.log
   tmux new-session -d -s "$tmp_session"
-  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
-  local count=0
-  while [[ $(tmux list-clients -t "$curr_session" | wc -l) -le 1 ]]; do
-    sleep 0.1
-    (( count++ ))
-    [[ $count -gt 30 ]] && break
-  done
-  echo "clients=$(tmux list-clients -t "$curr_session" | wc -l) count=$count" >> /tmp/yaziedit.log
-  tmux kill-session -t "$tmp_session"
+  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux kill-session -t '$tmp_session'" Enter
 }
 
   open_in_current() {
