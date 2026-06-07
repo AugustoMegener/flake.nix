@@ -77,8 +77,11 @@ tmux_chdir() {
   curr_session=$(tmux display -p '#S')
   local tmp_session
   tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
-  tmux new-session -d -s "$tmp_session"
-  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux refresh-client -t '$curr_session' && tmux kill-session -t '$tmp_session'" Enter
+  local width height
+  width=$(tmux display -p '#{window_width}')
+  height=$(tmux display -p '#{window_height}')
+  tmux new-session -d -s "$tmp_session" -x "$width" -y "$height"
+  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux kill-session -t '$tmp_session'" Enter
 }
 
   open_in_current() {
