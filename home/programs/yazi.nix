@@ -71,13 +71,21 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
     done < <(tmux list-panes -aF '#{session_name} #{pane_pid}' 2>/dev/null)
   }
 
-  open_in_current() {
-    if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+open_in_current() {
+  if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+    if [[ -n "$TMUX" ]]; then
+      tmux new-window -c "$DIR" "nix develop '$DIR' -c zsh -ic \"$EDITOR '$TARGET'\""
+    else
       exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
+    fi
+  else
+    if [[ -n "$TMUX" ]]; then
+      tmux new-window -c "$DIR" "$EDITOR '$TARGET'"
     else
       exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
     fi
-  }
+  fi
+}
 
   if [[ -n "$TMUX" ]]; then
     target_session=$(find_session)
