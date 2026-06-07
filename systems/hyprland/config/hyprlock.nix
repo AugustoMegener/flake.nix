@@ -11,7 +11,7 @@ programs.hyprlock = {
     background = [
       {
         path = "/home/kito/Pictures/Backgrounds/bg-1.jpg";
-        blur_passes = 5;
+        blur_passes = 2;
         blur_size = 3;
       }
     ];
