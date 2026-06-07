@@ -80,10 +80,12 @@ tmux_chdir() {
   local width height
   width=$(tmux display -p '#{window_width}')
   height=$(tmux display -p '#{window_height}')
+  local initial_clients
+  initial_clients=$(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l)
   tmux new-session -d -s "$tmp_session" -x "$width" -y "$height"
   tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
   (
-    while tmux list-clients -t "$tmp_session" 2>/dev/null | grep -q .; do
+    while [[ $(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l) -le $initial_clients ]]; do
       sleep 0.05
     done
     tmux kill-session -t "$tmp_session" 2>/dev/null
