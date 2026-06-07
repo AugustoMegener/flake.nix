@@ -24,7 +24,7 @@ programs.hyprlock = {
         valign = "center";
         outline_thickness = 2;
         inner_color = "rgb(48, 43, 36)";
-        outer_color = "rgb(43, 38, 34)";
+        outer_color = "rgba(3b3026ff)";
         font_color = "rgb(170, 144, 109)";
         placeholder_text = "senha...";
         check_color = "rgb(100, 200, 100)";
@@ -40,10 +40,9 @@ programs.hyprlock = {
         halign = "center";
         valign = "center";
         color = "rgb(170, 144, 109)";
-        shadow_passes = 1;
-        shadow_size = 0;
+        shadow_passes = 2;
+        shadow_size = 2;
         shadow_color = "rgb(43, 38, 34)";
-        shadow_boost = 1.0;
       }
     ];
   };
