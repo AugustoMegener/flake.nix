@@ -10,7 +10,7 @@ programs.hyprlock = {
 
     background = [
       {
-        path = "/home/augusto/wallpaper.png";
+        path = "/home/kito/Pictures/Backgrounds/bg-1.jpg";
         blur_passes = 2;
         blur_size = 7;
       }
