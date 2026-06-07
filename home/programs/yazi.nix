@@ -79,8 +79,9 @@ tmux_chdir() {
   tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
   tmux new-session -d -s "$tmp_session"
   tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux kill-session -t '$tmp_session'" Enter
-  sleep 0.5
-  tmux send-keys "" ""
+  while tmux has-session -t "$tmp_session" 2>/dev/null; do
+    sleep 0.05
+  done
   tmux refresh-client -l
 }
 
