@@ -23,12 +23,12 @@ programs.hyprlock = {
         halign = "center";
         valign = "center";
         outline_thickness = 2;
-        inner_color = "rgb(30, 30, 30)";
-        outer_color = "rgb(200, 150, 100)";
-        font_color = "rgb(213, 190, 161)";
+        inner_color = "rgb(48, 43, 36)";
+        outer_color = "rgb(43, 38, 34)";
+        font_color = "rgb(43, 38, 34)";
         placeholder_text = "senha...";
         check_color = "rgb(100, 200, 100)";
-        fail_color = "rgb(200, 80, 80)";
+        fail_color = "rgb(242, 81, 70)";
       }
     ];
 
@@ -39,7 +39,7 @@ programs.hyprlock = {
         position = "0, 100";
         halign = "center";
         valign = "center";
-        color = "#2b2622"; #rgb(213, 190, 161)";
+        color = "rgb(43, 38, 34)";
       }
     ];
   };
