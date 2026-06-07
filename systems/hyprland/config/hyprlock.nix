@@ -40,6 +40,10 @@ programs.hyprlock = {
         halign = "center";
         valign = "center";
         color = "rgb(170, 144, 109)";
+        shadow_passes = 1;
+        shadow_size = 0;
+        shadow_color = "rgb(43, 38, 34)";
+        shadow_boost = 1.0;
       }
     ];
   };
