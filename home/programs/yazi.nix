@@ -71,16 +71,33 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
     done < <(tmux list-panes -aF '#{session_name} #{pane_pid}' 2>/dev/null)
   }
 
-open_in_current() {
-  if [[ -n "$TMUX" ]]; then
-    tmux send-keys "cd '$DIR'" Enter
-  fi
-  if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-    exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
-  else
-    exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
-  fi
-}
+  tmux_chdir() {
+    local newdir=$1
+    local curr_session
+    curr_session=$(tmux display -p '#S')
+    local tmp_session
+    tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
+    tmux new-session -d -s "$tmp_session"
+    tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
+    local count=0
+    while [[ $(tmux list-clients -t "$curr_session" | wc -l) -le 1 ]]; do
+      sleep 0.1
+      (( count++ ))
+      [[ $count -gt 30 ]] && break
+    done
+    tmux kill-session -t "$tmp_session"
+  }
+
+  open_in_current() {
+    if [[ -n "$TMUX" ]]; then
+      tmux_chdir "$DIR"
+    fi
+    if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+      exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
+    else
+      exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
+    fi
+  }
 
   if [[ -n "$TMUX" ]]; then
     target_session=$(find_session)
