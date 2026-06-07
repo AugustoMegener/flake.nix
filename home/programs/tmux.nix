@@ -14,7 +14,7 @@
 
     extraConfig = ''
       set -gq allow-passthrough on 
-      set-hook -g client-detached 'run-shell "tmux list-panes -t #{session_name} -F #{pane_pid} | xargs -I{} ps --ppid {} -o comm= | grep -qvE \"^(zsh|yazi)$\" || tmux kill-session -t #{session_name}"'
+      set-hook -g client-detached 'run-shell "tmux list-panes -t #{session_name} -F #{pane_pid} | xargs -I{} ps --ppid {} -o comm= | grep -vE \"^(zsh|yazi)$\" | grep -q . || tmux kill-session -t #{session_name}"'
 
       setw -g mode-keys vi
       
