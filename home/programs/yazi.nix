@@ -72,18 +72,13 @@ yaziEdit = pkgs.writeShellScript "yazi-edit" ''
   }
 
 open_in_current() {
+  if [[ -n "$TMUX" ]]; then
+    tmux send-keys "cd '$DIR'" Enter
+  fi
   if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-    if [[ -n "$TMUX" ]]; then
-      tmux new-window -c "$DIR" "nix develop '$DIR' -c zsh -ic \"$EDITOR '$TARGET'\""
-    else
-      exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
-    fi
+    exec nix develop "$DIR" -c zsh -ic "cd '$DIR' && $EDITOR '$TARGET'"
   else
-    if [[ -n "$TMUX" ]]; then
-      tmux new-window -c "$DIR" "$EDITOR '$TARGET'"
-    else
-      exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
-    fi
+    exec bash -c "cd '$DIR' && exec $EDITOR '$TARGET'"
   fi
 }
 
