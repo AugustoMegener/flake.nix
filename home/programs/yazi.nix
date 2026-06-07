@@ -80,7 +80,8 @@ tmux_chdir() {
   tmux new-session -d -s "$tmp_session"
   tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir' && tmux kill-session -t '$tmp_session'" Enter
   sleep 0.5
-  tmux refresh-client
+  tmux send-keys "" ""
+  tmux refresh-client -l
 }
 
   open_in_current() {
