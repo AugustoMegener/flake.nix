@@ -1,4 +1,4 @@
 { ... }:
 {
-  programs.obs-studio.enabled = true;
+  programs.obs-studio.enable = true;
 }
