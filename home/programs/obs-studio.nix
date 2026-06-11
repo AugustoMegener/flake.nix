@@ -1,5 +1,7 @@
 { ... }:
 {
   programs.obs-studio.enable = true;
-  programs.obs-cli.enable = true;
+  packages = with pkgs; [
+    obs-cli
+  ];
 }
