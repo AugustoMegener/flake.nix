@@ -6,11 +6,5 @@
     obs-cli
   ];
 
-  xdg.desktopEntries.obs = {
-    name = "OBS Studio";
-    exec = "obs";
-    icon = "obs";
-    type = "Application";
-    categories = [ "AudioVideo" "Recorder" ];
-  };
+  xdg.systemDirs.data = [ "${pkgs.obs-studio}/share" ];
 }
