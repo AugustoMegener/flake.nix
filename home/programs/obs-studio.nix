@@ -6,5 +6,5 @@
     obs-cli
   ];
 
-  xdg.systemDirs.data = [ "${pkgs.obs-studio}/share" ];
+ xdg.systemDirs.data = [ "${pkgs.obs-studio}/share" ];
 }
