@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
-# walker-dir-open.sh <pasta-ou-arquivo>
-# Handler de "abrir" pra diretórios: se tiver flake.nix com devShell, abre nvim
-# dentro da nix shell; senão abre yazi puro. Sempre dentro de uma sessão tmux
-# nova (ou reaproveitada) e num kitty novo, já que é chamado fora de terminal.
-# Espera tmux-session-finder.sh e tmux-next-session.sh no mesmo diretório.
 
 set -u
 
@@ -25,7 +20,7 @@ MODE="dir"
 target_session=$("$TMUX_SESSION_FINDER" "$MODE" "$TARGET")
 
 if [[ -n "$target_session" ]]; then
-  kitty -e tmux attach-session -t "$target_session" >/dev/null 2>&1 &
+  kitty -e env -u TMUX tmux attach-session -t "$target_session" >/dev/null 2>&1 &
   disown
   exit 0
 fi
@@ -41,5 +36,5 @@ fi
 tmux new-session -d -s "$SESSION" -c "$DIR"
 tmux send-keys -t "$SESSION" "$CMD" Enter
 
-kitty -e tmux attach-session -t "$SESSION" >/dev/null 2>&1 &
+kitty -e env -u TMUX tmux attach-session -t "$SESSION" >/dev/null 2>&1 &
 disown
