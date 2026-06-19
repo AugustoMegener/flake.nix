@@ -72,7 +72,7 @@ in
       "x-scheme-handler/https" = ["zen-browser.desktop"];
       "x-scheme-handler/about" = ["zen-browser.desktop"];
       "x-scheme-handler/unknown" = ["zen-browser.desktop"];
-      "inode/directory" = [ "yazi-kitty.desktop" ];
+      #"inode/directory" = [ "yazi-kitty.desktop" ];
       "text/plain" = [ "nvim.desktop" ];
       "application/pdf" = [ "org.pwmt.zathura.desktop" ];
       "image/svg+xml" = [ "org.inkscape.Inkscape.desktop" ];
@@ -89,4 +89,13 @@ in
     videos = "$HOME/Videos";
   };
   home.packages = [ yazi-kitty ];
+xdg.desktopEntries.walker-dir-open = {
+  name = "Walker Dir Open";
+  exec = "walker-dir-open %f";
+  terminal = false;
+  noDisplay = true;
+  mimeType = [ "inode/directory" ];
+};
+
+xdg.mimeApps.defaultApplications."inode/directory" = "walker-dir-open.desktop";
 }
