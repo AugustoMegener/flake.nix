@@ -2,6 +2,8 @@
 
 set -u
 
+export TMUX_TMPDIR="/run/user/$(id -u)"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TMUX_SESSION_FINDER="$(command -v tmux-session-finder || echo "$SCRIPT_DIR/tmux-session-finder.sh")"
 TMUX_NEXT_SESSION="$(command -v tmux-next-session || echo "$SCRIPT_DIR/tmux-next-session.sh")"
