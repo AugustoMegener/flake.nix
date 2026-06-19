@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# yazi-edit.sh <arquivo-ou-pasta>
-# Espera os scripts tmux-session-finder.sh no mesmo diretório (ou ajuste SCRIPT_DIR).
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMUX_SESSION_FINDER="$SCRIPT_DIR/tmux-session-finder.sh"
+TMUX_SESSION_FINDER="$(command -v tmux-session-finder || echo "$SCRIPT_DIR/tmux-session-finder.sh")"
 
 FILE=$(realpath "$@")
 if [[ -d "$FILE" ]]; then
