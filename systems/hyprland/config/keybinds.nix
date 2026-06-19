@@ -11,7 +11,7 @@
       "$mainMod, M, exit,"
       "$mainMod, E, exec, kitty zsh -ic 'source init-tmux yazi'"
       "$mainMod, V, togglefloating,"
-      "$mainMod, Z, exec, walker"
+      "$mainMod, BACKSLASH, exec, walker"
       "$mainMod, P, pseudo,"
       "$mainMod, J, togglesplit,"
       "$mainMod, G, exec, hyprpicker -a"
