@@ -3,8 +3,8 @@
 set -u
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMUX_SESSION_FINDER="$SCRIPT_DIR/tmux-session-finder.sh"
-TMUX_NEXT_SESSION="$SCRIPT_DIR/tmux-next-session.sh"
+TMUX_SESSION_FINDER="$(command -v tmux-session-finder || echo "$SCRIPT_DIR/tmux-session-finder.sh")"
+TMUX_NEXT_SESSION="$(command -v tmux-next-session || echo "$SCRIPT_DIR/tmux-next-session.sh")"
 
 RAW="$1"
 FILE=$(realpath "$RAW")
