@@ -1,7 +1,7 @@
 { ... }:
 {
   services.hyprpaper = {
-    enable = false;
+    enable = true;
     settings = {
       preload = [ "/home/kito/Pictures/Backgrounds/bg-1.jpg" ];
       wallpaper = [
