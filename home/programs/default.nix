@@ -17,5 +17,6 @@
     ./dysk.nix
     ./bat.nix
     ./obs-studio.nix
+    ./flashpoint.nix
   ];
 }
