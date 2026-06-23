@@ -142,7 +142,7 @@ in
   programs.walker = {
     enable = true;
   };
-
+services.udev.packages = [ pkgs.openrgb ];
 # services.displayManager.sddm.enable = true;
 
   services.displayManager.defaultSession = "hyprland";
@@ -201,6 +201,7 @@ in
   environment.systemPackages = with pkgs; [ 
     xdg-desktop-portal
     gamescope-wsi
+    openrgb
   ];
 
   
