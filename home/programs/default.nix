@@ -18,5 +18,6 @@
     ./bat.nix
     ./obs-studio.nix
     ./flashpoint.nix
+    ./openrgb.nix
   ];
 }
