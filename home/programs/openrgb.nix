@@ -1,7 +1,7 @@
 
 { config, pkgs, ... }:
 {
-  programs.openrgb.enable = true;
-  services.udev.packages = [ pkgs.openrgb ];
+services.udev.packages = [ pkgs.openrgb ];
+environment.systemPackages = [ pkgs.openrgb ];
 
 }
