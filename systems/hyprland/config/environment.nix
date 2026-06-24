@@ -1,10 +1,11 @@
-{ ... }:
+{ config, ... }:
 {
   wayland.windowManager.hyprland.settings = {
     env = [
       "XCURSOR_SIZE,12"
       "HYPRCURSOR_SIZE,12"
       "GTK_THEME,Adwaita:dark"
+    "PATH,${config.home.profileDirectory}/bin:$PATH"
     ];
   };
 
