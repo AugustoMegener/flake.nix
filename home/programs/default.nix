@@ -19,5 +19,6 @@
     ./obs-studio.nix
     ./flashpoint.nix
     ./openrgb.nix
+    ./walker.nix
   ];
 }
