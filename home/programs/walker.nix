@@ -1,8 +1,12 @@
 { ... }:
 {
   programs.walker = {
-    themes.screenshot = {
-      config.columns."dmenu" = 3;
+    enable = true;
+    themes = {
+      screenshot = {
+        style = "";
+        config.columns."dmenu" = 3;
+      };
     };
   };
 }
