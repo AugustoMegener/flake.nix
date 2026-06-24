@@ -47,7 +47,7 @@
       "$mainMod, Escape, exec, systemctl hibernate"
       "$mainMod SHIFT, Escape, exec, hyprshutdown --post-cmd 'systemctl poweroff'"
       "$mainMod CTRL, Escape, exec, hyprshutdown --post-cmd 'systemctl reboot'"
-      ", code:148, exec, "
+      #", code:148, exec, "
     ];
 
     bindm = [
