@@ -44,6 +44,7 @@
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
+      "$mainMod, Escape, exec, qs ipc call powerMenu toggle"
       #"$mainMod, Escape, exec, systemctl hibernate"
       #"$mainMod SHIFT, Escape, exec, hyprshutdown --post-cmd 'systemctl poweroff'"
       #"$mainMod CTRL, Escape, exec, hyprshutdown --post-cmd 'systemctl reboot'"
