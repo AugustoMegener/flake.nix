@@ -76,6 +76,7 @@ export LIBGL_ALWAYS_SOFTWARE=1
 export GALLIUM_DRIVER=llvmpipe
 export WINEESYNC=0
 export WINEFSYNC=0
+export DISPLAY=localhost:0
   cd "$FP_DIR"
   exec ./start-flashpoint.sh
 '';

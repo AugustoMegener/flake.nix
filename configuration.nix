@@ -102,7 +102,7 @@ in
       "bluez5.enable-sbc-xq" = true;
     };
   };
-
+services.xserver.displayManager.xserverArgs = [ "-listen" "tcp" ];
 # Enable touchpad support (enabled default in most desktopManager).
 # services.libinput.enable = true;
 
