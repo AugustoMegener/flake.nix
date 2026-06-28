@@ -27,6 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    inputs.flashpoint.url = "path:./flakes/flashpoint";
+
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
   };
 
