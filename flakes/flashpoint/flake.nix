@@ -26,32 +26,33 @@
 
     flashpoint = pkgs.buildFHSEnv {
       name = "flashpoint";
-      targetPkgs = p: with p; [
-        file
-        php
-        libx11
-        libxt
-        libxcomposite
-        mesa
-        libGL
-        libGLU
-        glib
-        nspr
-        libdrm
-        pango
-        cairo
-        expat
-        libxkbcommon
-        alsa-lib
-        libxdamage
-        libxext
-        libxfixes
-        libxrandr
-        libxcb
-        udev
-        pipewire
-        pulseaudio
-      ];
+targetPkgs = p: with p; [
+  file
+  php
+  xkeyboard_config
+  libx11
+  libxt
+  libxcomposite
+  mesa
+  libGL
+  libGLU
+  glib
+  nspr
+  libdrm
+  pango
+  cairo
+  expat
+  libxkbcommon
+  alsa-lib
+  libxdamage
+  libxext
+  libxfixes
+  libxrandr
+  libxcb
+  udev
+  pipewire
+  pulseaudio
+];
       runScript = pkgs.writeShellScript "flashpoint-run" ''
         FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
         if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
