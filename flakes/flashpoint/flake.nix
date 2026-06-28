@@ -74,9 +74,10 @@ runScript = pkgs.writeShellScript "flashpoint-run" ''
   export BROWSER=false
 export LIBGL_ALWAYS_SOFTWARE=1
 export GALLIUM_DRIVER=llvmpipe
-export WINEESYNC=0
-export WINEFSYNC=0
-export DISPLAY=localhost:0
+export LIBGL_DRIVERS_PATH="${pkgs.mesa.drivers}/lib/dri"
+export EGL_PLATFORM=surfaceless
+export WINEOPENGL=
+export WINE_GL_HIDE_TYPE=0
   cd "$FP_DIR"
   exec ./start-flashpoint.sh
 '';
