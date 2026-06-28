@@ -26,6 +26,7 @@
 
     flashpoint = pkgs.buildFHSEnv {
       name = "flashpoint";
+  extraBwrapArgs = [ "--share-net" "--dev-bind" "/dev" "/dev" ];
       targetPkgs = p: with p; [
         toybox
         file
