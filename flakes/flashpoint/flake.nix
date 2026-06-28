@@ -26,51 +26,51 @@
 
     flashpoint = pkgs.buildFHSEnv {
       name = "flashpoint";
-targetPkgs = p: with p; [
-  file
-  php
-  xkeyboard_config
-  wine
-  libx11
-  libxt
-  libxcomposite
-  mesa
-  libGL
-  libGLU
-  glib
-  nspr
-  libdrm
-  pango
-  cairo
-  expat
-  libxkbcommon
-  alsa-lib
-  libxdamage
-  libxext
-  libxfixes
-  libxrandr
-  libxcb
-  udev
-  pipewire
-  pulseaudio
-xdg-utils
-bash
-];
-runScript = pkgs.writeShellScript "flashpoint-run" ''
-  FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
-  if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
-    echo "Inicializando Flashpoint em $FP_DIR ..."
-    mkdir -p "$FP_DIR"
-    cp -r ${flashpointData}/. "$FP_DIR"
-    chmod -R u+w "$FP_DIR"
-    echo "Pronto."
-  fi
-  export LIBGL_ALWAYS_SOFTWARE=1
-  export GALLIUM_DRIVER=llvmpipe
-  export BROWSER=false
-  cd "$FP_DIR"
-  exec ./start-flashpoint.sh
-'';
+      targetPkgs = p: with p; [
+        file
+        php
+        xkeyboard_config
+        xdg-utils
+        bash
+        wine
+        mesa
+        mesa.drivers
+        libglvnd
+        libGL
+        libGLU
+        libx11
+        libxt
+        libxcomposite
+        glib
+        nspr
+        libdrm
+        pango
+        cairo
+        expat
+        libxkbcommon
+        alsa-lib
+        libxdamage
+        libxext
+        libxfixes
+        libxrandr
+        libxcb
+        udev
+        pipewire
+        pulseaudio
+      ];
+      runScript = pkgs.writeShellScript "flashpoint-run" ''
+        FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
+        if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
+          echo "Inicializando Flashpoint em $FP_DIR ..."
+          mkdir -p "$FP_DIR"
+          cp -r ${flashpointData}/. "$FP_DIR"
+          chmod -R u+w "$FP_DIR"
+          echo "Pronto."
+        fi
+        export BROWSER=false
+        cd "$FP_DIR"
+        exec ./start-flashpoint.sh
+      '';
     };
   in
   {
