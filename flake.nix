@@ -55,7 +55,11 @@ flashpoint = {
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          flashpoint.nixosModules.default
+{
+  home-manager.users.kito.home.packages = [
+    flashpoint.packages.x86_64-linux.flashpoint
+  ];
+}
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
