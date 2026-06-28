@@ -53,6 +53,8 @@ targetPkgs = p: with p; [
   udev
   pipewire
   pulseaudio
+xdg-utils
+bash
 ];
 runScript = pkgs.writeShellScript "flashpoint-run" ''
   FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
@@ -65,6 +67,7 @@ runScript = pkgs.writeShellScript "flashpoint-run" ''
   fi
   export LIBGL_ALWAYS_SOFTWARE=1
   export GALLIUM_DRIVER=llvmpipe
+  export BROWSER=false
   cd "$FP_DIR"
   exec ./start-flashpoint.sh
 '';
