@@ -61,6 +61,19 @@
         pulseaudio
       ];
       runScript = pkgs.writeShellScript "flashpoint-run" ''
+cat > ~/.local/share/applications/flashpoint-archive.desktop << EOF
+[Desktop Entry]
+Type=Application
+Name=Flashpoint Archive
+Comment=An archive for games and animations from the web.
+Icon=$HOME/.local/share/flashpoint/Launcher/icon.svg
+StartupWMClass=flashpoint-launcher
+Exec=flashpoint
+Path=$HOME
+Terminal=false
+Categories=Archiving;Game;
+SingleMainWindow=true
+EOF
         FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
         if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
           echo "Inicializando Flashpoint em $FP_DIR ..."
