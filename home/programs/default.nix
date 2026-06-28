@@ -20,5 +20,6 @@
     ./openrgb.nix
     ./walker.nix
     ./quickshell.nix
+    ./aseprite.nix
   ];
 }
