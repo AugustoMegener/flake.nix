@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    inputs.flashpoint.url = "path:./flakes/flashpoint";
+    flashpoint.url = "path:./flakes/flashpoint";
 
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
   };
@@ -51,6 +51,7 @@
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          flashpoint.nixosModules.default
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
