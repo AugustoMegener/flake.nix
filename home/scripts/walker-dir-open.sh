@@ -29,8 +29,8 @@ fi
 
 SESSION=$("$TMUX_NEXT_SESSION")
 
-if [[ -f "$DIR/flake.nix" ]]; then
-  CMD="cd '$DIR' && (nix develop '$DIR' -c zsh -ic \"cd '$DIR' && $EDITOR '$TARGET'\" || (cd '$DIR' && exec $EDITOR '$TARGET'))"
+if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
+  CMD="cd '$DIR' && nix develop '$DIR' -c zsh -ic \"cd '$DIR' && $EDITOR '$TARGET'\""
 else
   CMD="cd '$DIR' && exec yazi '$TARGET'"
 fi
