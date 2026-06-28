@@ -8,8 +8,8 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
-    flashpointData = pkgs.stdenv.mkDerivation {
       pname = "flashpoint-data";
+      flashpointData = pkgs.stdenv.mkDerivation {
       version = "14.0.3";
 
       src = pkgs.fetchurl {
@@ -35,38 +35,41 @@
     flashpoint = pkgs.buildFHSEnv {
       name = "flashpoint";
 
-      targetPkgs = p: with p; [
-        toybox
-        electron
-        pipewire
-        pulseaudio
-        gtk3
-        gtk2
-        nss
-        php
-        wine
-        xorg.libX11
-        xorg.libXt
-        xorg.libXcomposite
-        mesa
-        glib
-        nspr
-        at-spi2-atk
-        cups
-        dbus
-        libdrm
-        pango
-        cairo
-        expat
-        libxkbcommon
-        alsa-lib
-        xorg.libXdamage
-        xorg.libXext
-        xorg.libXfixes
-        xorg.libXrandr
-        xorg.libxcb
-        udev
-      ];
+targetPkgs = p: with p; [
+  toybox
+  file          # <- adiciona
+  electron
+  pipewire
+  pulseaudio
+  gtk3
+  gtk2
+  nss
+  php
+  wine
+  xorg.libX11
+  xorg.libXt
+  xorg.libXcomposite
+  mesa          # já estava, mas garante que...
+  libGL         # <- adiciona (puxa libgbm corretamente)
+  libGLU        # <- adiciona
+  glib
+  nspr
+  at-spi2-atk
+  cups
+  dbus
+  libdrm
+  pango
+  cairo
+  expat
+  libxkbcommon
+  alsa-lib
+  xorg.libXdamage
+  xorg.libXext
+  xorg.libXfixes
+  xorg.libXrandr
+  xorg.libxcb
+  udev
+];
 
       runScript = pkgs.writeShellScript "flashpoint-run" ''
         FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
