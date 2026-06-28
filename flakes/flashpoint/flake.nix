@@ -54,18 +54,20 @@ targetPkgs = p: with p; [
   pipewire
   pulseaudio
 ];
-      runScript = pkgs.writeShellScript "flashpoint-run" ''
-        FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
-        if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
-          echo "Inicializando Flashpoint em $FP_DIR ..."
-          mkdir -p "$FP_DIR"
-          cp -r ${flashpointData}/. "$FP_DIR"
-          chmod -R u+w "$FP_DIR"
-          echo "Pronto."
-        fi
-        cd "$FP_DIR"
-        exec ./start-flashpoint.sh
-      '';
+runScript = pkgs.writeShellScript "flashpoint-run" ''
+  FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
+  if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
+    echo "Inicializando Flashpoint em $FP_DIR ..."
+    mkdir -p "$FP_DIR"
+    cp -r ${flashpointData}/. "$FP_DIR"
+    chmod -R u+w "$FP_DIR"
+    echo "Pronto."
+  fi
+  export LIBGL_ALWAYS_SOFTWARE=1
+  export GALLIUM_DRIVER=llvmpipe
+  cd "$FP_DIR"
+  exec ./start-flashpoint.sh
+'';
     };
   in
   {
