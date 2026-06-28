@@ -54,9 +54,8 @@ targetPkgs = p: with p; [
   libGLU
   glib
   nspr
-  at-spi2-atk
-  cups
-  # dbus   <- remove
+  # at-spi2-atk  <- remove
+  # cups          <- remove
   libdrm
   pango
   cairo
