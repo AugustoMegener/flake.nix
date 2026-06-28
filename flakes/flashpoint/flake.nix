@@ -37,7 +37,7 @@
 
 targetPkgs = p: with p; [
   toybox
-  file          # <- adiciona
+  file
   electron
   pipewire
   pulseaudio
@@ -46,28 +46,28 @@ targetPkgs = p: with p; [
   nss
   php
   wine
-  xorg.libX11
-  xorg.libXt
-  xorg.libXcomposite
-  mesa          # já estava, mas garante que...
-  libGL         # <- adiciona (puxa libgbm corretamente)
-  libGLU        # <- adiciona
+  libx11
+  libxt
+  libxcomposite
+  mesa
+  libGL
+  libGLU
   glib
   nspr
   at-spi2-atk
   cups
-  dbus
+  # dbus   <- remove
   libdrm
   pango
   cairo
   expat
   libxkbcommon
   alsa-lib
-  xorg.libXdamage
-  xorg.libXext
-  xorg.libXfixes
-  xorg.libXrandr
-  xorg.libxcb
+  libxdamage
+  libxext
+  libxfixes
+  libxrandr
+  libxcb
   udev
 ];
 
