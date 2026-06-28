@@ -1,4 +1,6 @@
-{ ... }: 
+{ pkgs, ... }: 
 {
-  programs.aseprite.enable = true;
+  environment.systemPackages = [
+    pkgs.aseprite
+  ];
 }
