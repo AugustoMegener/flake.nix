@@ -26,6 +26,9 @@
 
     flashpoint = pkgs.buildFHSEnv {
       name = "flashpoint";
+  extraBwrapArgs = [
+    "--bind" "/tmp/.X11-unix" "/tmp/.X11-unix"
+  ];
       targetPkgs = p: with p; [
         file
         php
