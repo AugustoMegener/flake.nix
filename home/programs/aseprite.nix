@@ -1,6 +1,8 @@
 { pkgs, ... }: 
 {
-  environment.systemPackages = [
+
+  home.packages = [
     pkgs.aseprite
   ];
+
 }
