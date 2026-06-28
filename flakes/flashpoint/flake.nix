@@ -70,16 +70,23 @@ runScript = pkgs.writeShellScript "flashpoint-run" ''
     chmod -R u+w "$FP_DIR"
     echo "Pronto."
   fi
-  export DISPLAY=:0
+  export DISPLAY=localhost:0
   export BROWSER=false
-export LIBGL_ALWAYS_SOFTWARE=1
-export GALLIUM_DRIVER=llvmpipe
-export LIBGL_DRIVERS_PATH="${pkgs.mesa.drivers}/lib/dri"
-export EGL_PLATFORM=surfaceless
-export WINEOPENGL=
-export WINE_GL_HIDE_TYPE=0
+  export LIBGL_DRIVERS_PATH="${pkgs.mesa.drivers}/lib/dri"
+  export LIBGL_ALWAYS_SOFTWARE=1
+  export GALLIUM_DRIVER=llvmpipe
   cd "$FP_DIR"
-  exec ./start-flashpoint.sh
+  [ `id -u` -ne 0 ] && cd -P -- "$FP_DIR" || exit 1
+  if [ "`file -b --mime-type Libraries/lib/x86_64-linux-gnu/libgtk-3.so.0`" = 'application/x-sharedlib' ]; then
+    export GDK_PIXBUF_MODULE_FILE="$FP_DIR/Libraries/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+    export GSETTINGS_SCHEMA_DIR="$FP_DIR/Libraries/share/glib-2.0/schemas"
+    export GTK_MODULES=
+    export LD_LIBRARY_PATH="$FP_DIR/Libraries/lib/x86_64-linux-gnu"
+    export PATH="$FP_DIR/Libraries/bin"
+  fi
+  export WINEPREFIX="$FP_DIR/FPSoftware/Wine"
+  cd "$FP_DIR/Launcher"
+  exec ./flashpoint-launcher --js-flags=--lite_mode --ozone-platform-hint=auto
 '';
     };
   in
