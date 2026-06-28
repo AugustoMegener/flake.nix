@@ -24,52 +24,19 @@
       dontFixup = true;
     };
 
-    flashpoint = pkgs.buildFHSEnv {
-      name = "flashpoint";
-      targetPkgs = p: with p; [
-        toybox
-        file
-        electron
-        pipewire
-        pulseaudio
-        gtk3
-        gtk2
-        nss
-        php
-        libx11
-        libxt
-        libxcomposite
-        mesa
-        libGL
-        libGLU
-        glib
-        nspr
-        libdrm
-        pango
-        cairo
-        expat
-        libxkbcommon
-        alsa-lib
-        libxdamage
-        libxext
-        libxfixes
-        libxrandr
-        libxcb
-        udev
-      ];
-      runScript = pkgs.writeShellScript "flashpoint-run" ''
-        FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
-        if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
-          echo "Inicializando Flashpoint em $FP_DIR ..."
-          mkdir -p "$FP_DIR"
-          cp -r ${flashpointData}/. "$FP_DIR"
-          chmod -R u+w "$FP_DIR"
-          echo "Pronto."
-        fi
-        cd "$FP_DIR"
-        exec ./start-flashpoint.sh --no-sandbox --disable-gpu "$@"
-      '';
-    };
+    flashpoint = pkgs.writeShellScriptBin "flashpoint" ''
+      FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
+      if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
+        echo "Inicializando Flashpoint em $FP_DIR ..."
+        mkdir -p "$FP_DIR"
+        cp -r ${flashpointData}/. "$FP_DIR"
+        chmod -R u+w "$FP_DIR"
+        echo "Pronto."
+      fi
+      export PATH="${pkgs.lib.makeBinPath (with pkgs; [ file php ])}:$PATH"
+      cd "$FP_DIR"
+      exec ./start-flashpoint.sh
+    '';
   in
   {
     packages.${system} = {
