@@ -24,59 +24,24 @@
       dontFixup = true;
     };
 
-    flashpoint = pkgs.buildFHSEnv {
-      name = "flashpoint";
-  extraBwrapArgs = [ "--share-net" "--dev-bind" "/dev" "/dev" ];
-      targetPkgs = p: with p; [
-        toybox
-        file
-        electron
-        pipewire
-        pulseaudio
-        gtk3
-        gtk2
-        nss
-        php
-        libx11
-        libxt
-        libxcomposite
-        mesa
-        libGL
-        libGLU
-        glib
-        nspr
-        libdrm
-        pango
-        cairo
-        expat
-        libxkbcommon
-        alsa-lib
-        libxdamage
-        libxext
-        libxfixes
-        libxrandr
-        libxcb
-        udev
-      ];
-flashpoint = pkgs.writeShellScriptBin "flashpoint" ''
-  FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
-  if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
-    echo "Inicializando Flashpoint em $FP_DIR ..."
-    mkdir -p "$FP_DIR"
-    cp -r ${flashpointData}/. "$FP_DIR"
-    chmod -R u+w "$FP_DIR"
-    echo "Pronto."
-  fi
-  export PATH="${pkgs.lib.makeBinPath (with pkgs; [ toybox file php ])}:$PATH"
-  export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath (with pkgs; [
-    gtk3 gtk2 nss libx11 libxt libxcomposite mesa libGL libGLU
-    glib nspr libdrm pango cairo expat libxkbcommon alsa-lib
-    libxdamage libxext libxfixes libxrandr libxcb udev pipewire pulseaudio
-  ])}:$LD_LIBRARY_PATH"
-  cd "$FP_DIR"
-  exec ./start-flashpoint.sh --no-sandbox "$@"
-'';
-    };
+    flashpoint = pkgs.writeShellScriptBin "flashpoint" ''
+      FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
+      if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
+        echo "Inicializando Flashpoint em $FP_DIR ..."
+        mkdir -p "$FP_DIR"
+        cp -r ${flashpointData}/. "$FP_DIR"
+        chmod -R u+w "$FP_DIR"
+        echo "Pronto."
+      fi
+      export PATH="${pkgs.lib.makeBinPath (with pkgs; [ toybox file php ])}:$PATH"
+      export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath (with pkgs; [
+        gtk3 gtk2 nss libx11 libxt libxcomposite mesa libGL libGLU
+        glib nspr libdrm pango cairo expat libxkbcommon alsa-lib
+        libxdamage libxext libxfixes libxrandr libxcb udev pipewire pulseaudio
+      ])}:$LD_LIBRARY_PATH"
+      cd "$FP_DIR"
+      exec ./start-flashpoint.sh --no-sandbox "$@"
+    '';
   in
   {
     packages.${system} = {
