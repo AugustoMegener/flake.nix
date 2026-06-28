@@ -30,6 +30,7 @@ targetPkgs = p: with p; [
   file
   php
   xkeyboard_config
+  wine
   libx11
   libxt
   libxcomposite
