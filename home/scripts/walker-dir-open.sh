@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# walker-dir-open.sh <pasta-ou-arquivo>
+# Handler de "abrir" pra diretórios: se tiver flake.nix com devShell, abre nvim
+# dentro da nix shell; senão abre yazi puro. Sempre dentro de uma sessão tmux
+# nova (ou reaproveitada) e num kitty novo, já que é chamado fora de terminal.
+# Espera tmux-session-finder.sh e tmux-next-session.sh no mesmo diretório.
 
 set -u
 
@@ -29,8 +34,8 @@ fi
 
 SESSION=$("$TMUX_NEXT_SESSION")
 
-if [[ -f "$DIR/flake.nix" ]] && nix flake show "$DIR" --json 2>/dev/null | grep -q '"devShells"'; then
-  CMD="cd '$DIR' && nix develop '$DIR' -c zsh -ic \"cd '$DIR' && $EDITOR '$TARGET'\""
+if [[ -f "$DIR/flake.nix" ]]; then
+  CMD="cd '$DIR' && (nix develop '$DIR' -c zsh -ic \"cd '$DIR' && $EDITOR '$TARGET'\" || (cd '$DIR' && exec $EDITOR '$TARGET'))"
 else
   CMD="cd '$DIR' && exec yazi '$TARGET'"
 fi
