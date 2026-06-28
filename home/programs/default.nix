@@ -21,5 +21,6 @@
     ./openrgb.nix
     ./walker.nix
     ./quickshell.nix
+    ./flashpoint.nix
   ];
 }
