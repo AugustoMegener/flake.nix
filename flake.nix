@@ -57,7 +57,7 @@ flashpoint = {
         modules = [
 {
   home-manager.users.kito.home.packages = [
-    flashpoint.packages.x86_64-linux.flashpoint
+    #flashpoint.packages.x86_64-linux.flashpoint
   ];
 }
           ./configuration.nix
