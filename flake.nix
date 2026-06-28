@@ -45,6 +45,7 @@
       nixgl,
       hyprland-config,
       hytale-launcher,
+      flashpoint,
       ...
     }@inputs:
     {
