@@ -57,18 +57,18 @@
         libxcb
         udev
       ];
-      runScript = pkgs.writeShellScript "flashpoint-run" ''
-        FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
-        if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
-          echo "Inicializando Flashpoint em $FP_DIR ..."
-          mkdir -p "$FP_DIR"
-          cp -r ${flashpointData}/. "$FP_DIR"
-          chmod -R u+w "$FP_DIR"
-          echo "Pronto."
-        fi
-        cd "$FP_DIR"
-        exec ./start-flashpoint.sh --no-sandbox "$@"
-      '';
+runScript = pkgs.writeShellScript "flashpoint-run" ''
+  FP_DIR="''${FLASHPOINT_DIR:-$HOME/.local/share/flashpoint}"
+  if [ ! -f "$FP_DIR/start-flashpoint.sh" ]; then
+    echo "Inicializando Flashpoint em $FP_DIR ..."
+    mkdir -p "$FP_DIR"
+    cp -rl ${flashpointData}/. "$FP_DIR"
+    chmod -R u+w "$FP_DIR"
+    echo "Pronto."
+  fi
+  cd "$FP_DIR"
+  exec ./start-flashpoint.sh --no-sandbox "$@"
+'';
     };
   in
   {
