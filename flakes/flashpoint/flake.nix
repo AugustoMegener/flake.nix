@@ -72,6 +72,10 @@ runScript = pkgs.writeShellScript "flashpoint-run" ''
   fi
   export DISPLAY=:0
   export BROWSER=false
+export LIBGL_ALWAYS_SOFTWARE=1
+export GALLIUM_DRIVER=llvmpipe
+export WINEESYNC=0
+export WINEFSYNC=0
   cd "$FP_DIR"
   exec ./start-flashpoint.sh
 '';
