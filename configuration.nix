@@ -12,6 +12,7 @@
 
 {
   imports = [
+    ./greetd
     ./hardware-configuration.nix
   ];
 
@@ -130,29 +131,20 @@
       }
     ];
   };
-# programs.firefox.enable = true;
 
   programs.hyprland.enable = true;
-
+  programs.brightnessctl.enable = true;
   services.xserver.enable = true;
 
   programs.walker = {
     enable = true;
   };
-services.udev.packages = [ pkgs.openrgb ];
+  services.udev.packages = [ pkgs.openrgb ];
 # services.displayManager.sddm.enable = true;
 
   services.displayManager.defaultSession = "hyprland";
 
-  /*services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd start-hyprland";
-        user = "kito";
-      };
-    };
-  };*/
+
 
   hardware.graphics.enable = true;
   security.polkit.enable = true;
