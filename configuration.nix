@@ -8,13 +8,11 @@
   pkgs,
   ...
 }:
-let
 
-in
+
 {
   imports = [
     ./hardware-configuration.nix
-    ./gamescope-session.nix
   ];
 
   hardware.bluetooth = {
@@ -102,7 +100,6 @@ in
       "bluez5.enable-sbc-xq" = true;
     };
   };
-services.xserver.displayManager.xserverArgs = [ "-listen" "tcp" ];
 # Enable touchpad support (enabled default in most desktopManager).
 # services.libinput.enable = true;
 
@@ -175,19 +172,7 @@ services.udev.packages = [ pkgs.openrgb ];
   };
 
   programs = {
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
     steam.gamescopeSession.enable = true;
-  };
-
-  specialisation.gamescope.configuration = {
-    boot.kernelParams = [ "noresume" ];
-    /*services.greetd.settings.default_session = {
-      command = "/etc/greetd/gamescope-autologin";
-      user = "kito";
-    };*/
   };
 
   environment.shells = [ pkgs.zsh ];
@@ -200,7 +185,6 @@ services.udev.packages = [ pkgs.openrgb ];
 
   environment.systemPackages = with pkgs; [ 
     xdg-desktop-portal
-    gamescope-wsi
     openrgb
   ];
 
