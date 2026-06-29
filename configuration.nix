@@ -133,7 +133,6 @@
   };
 
   programs.hyprland.enable = true;
-  programs.brightnessctl.enable = true;
   services.xserver.enable = true;
 
   programs.walker = {
