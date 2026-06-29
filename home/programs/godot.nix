@@ -1,8 +1,4 @@
 { pkgs, ... }: 
 {
-
-  home.packages = [
-    pkgs.aseprite
-  ];
-
+  programs.godot.enable = true; 
 }
