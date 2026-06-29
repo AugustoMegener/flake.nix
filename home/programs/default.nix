@@ -21,5 +21,6 @@
     ./walker.nix
     ./quickshell.nix
     ./aseprite.nix
+    ./godot.nix
   ];
 }
