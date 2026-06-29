@@ -135,6 +135,7 @@
   programs.hyprland.enable = true;
   services.xserver.enable = true;
 
+
   programs.walker = {
     enable = true;
   };

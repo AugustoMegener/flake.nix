@@ -15,6 +15,6 @@
 
   programs.regreet = {
     enable = true;
-    cssPath = ./style.css;
+    extraCss = builtins.readFile ./style.css;
   };
 }
