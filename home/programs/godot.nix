@@ -1,4 +1,8 @@
 { pkgs, ... }: 
 {
-  programs.godot.enable = true; 
+
+  home.packages = [
+    pkgs.godot
+  ];
+
 }
