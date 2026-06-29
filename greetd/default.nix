@@ -3,7 +3,7 @@
 
   services.greetd = {
     enable = true;
-    cageArgs = [ "-s" ];
+
     settings = {
       default_session = {
         command = "${pkgs.greetd.regreet}/bin/regreet";
@@ -15,6 +15,8 @@
 
   programs.regreet = {
     enable = true;
+
+    cageArgs = [ "-s" ];
     extraCss = builtins.readFile ./style.css;
   };
 }
