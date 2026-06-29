@@ -67,11 +67,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1782680113,
-        "narHash": "sha256-38NmJEJFYvZclgJpQYT6npk+0vFRVCE95653CElyM40=",
+        "lastModified": 1782700189,
+        "narHash": "sha256-18QtO011euyByoHfatWJriu1/9/zoAcLs3KgJAki++Q=",
         "owner": "AugustoMegener",
         "repo": "bolchevim",
-        "rev": "bb8d0b2a43fcddfcab61133f2b1df94dbd894395",
+        "rev": "a45e589af7040c97b4e1b144bcfb805cb3f3bb9c",
         "type": "github"
       },
       "original": {
