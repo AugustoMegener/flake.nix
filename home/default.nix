@@ -41,10 +41,6 @@ imports = [
     };
   };
 
-  systemd.user.services.swaync = {
-    Unit.Description = "Swaync otification daemon";
-    Install.WantedBy = lib.mkForce [ ];
-  };
 
 
   programs.home-manager.enable = true;
