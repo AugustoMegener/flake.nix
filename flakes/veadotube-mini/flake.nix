@@ -67,7 +67,8 @@ installPhase = ''
         mkdir -p $out/bin
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
           --chdir $out \
-          --prefix LD_LIBRARY_PATH : "${pkgs.icu}/lib"
+          --prefix LD_LIBRARY_PATH : "${pkgs.icu}/lib" \
+          --prefix PATH : "${pkgs.file}/bin"
       '';
     };
   };
