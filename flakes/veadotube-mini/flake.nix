@@ -50,7 +50,10 @@
         pkgs.xorg.libXtst
       ];
 
-      dontAutoPatchelf = true;
+      autoPatchelfIgnoreMissing = [
+        "libsteam_api.so"
+        "libGLES_CM.so.1"
+      ];
 
       unpackPhase = ''
         unzip "$src"
@@ -64,9 +67,8 @@
           --chdir $out
       '';
 
-      postFixup = ''
+      preFixup = ''
         addAutoPatchelfSearchPath $out/lib
-        autoPatchelf --ignore-missing "libsteam_api.so libGLES_CM.so.1" $out
       '';
     };
   };
