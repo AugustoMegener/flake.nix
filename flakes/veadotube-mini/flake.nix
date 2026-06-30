@@ -66,7 +66,7 @@
 
       postFixup = ''
         addAutoPatchelfSearchPath $out/lib
-        autoPatchelf --ignore-missing libsteam_api.so --ignore-missing libGLES_CM.so.1 $out
+        autoPatchelf --ignore-missing "libsteam_api.so libGLES_CM.so.1" $out
       '';
     };
   };
