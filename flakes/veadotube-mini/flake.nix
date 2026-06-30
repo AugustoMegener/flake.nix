@@ -23,6 +23,12 @@
         pkgs.glib
         pkgs.zlib
         pkgs.icu
+        pkgs.fontconfig
+        pkgs.freetype
+        pkgs.stdenv.cc.cc.lib
+        pkgs.glib
+        pkgs.zlib
+        pkgs.icu
         pkgs.libGL
         pkgs.libGLU
         pkgs.libglvnd
@@ -59,7 +65,7 @@
       unpackPhase = ''
         unzip "$src"
       '';
-installPhase = ''
+      installPhase = ''
         mkdir -p $out
         cp -r ./* $out/
         chmod -R u+w $out
@@ -67,8 +73,9 @@ installPhase = ''
         mkdir -p $out/bin
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
           --chdir $out \
-          --prefix LD_LIBRARY_PATH : "${pkgs.icu}/lib" \
-          --prefix PATH : "${pkgs.file}/bin"
+          --prefix LD_LIBRARY_PATH : "${pkgs.icu}/lib:${pkgs.fontconfig.lib}/lib:${pkgs.freetype}/lib" \
+          --prefix PATH : "${pkgs.file}/bin" \
+          --set FONTCONFIG_FILE "${pkgs.fontconfig.out}/etc/fonts/fonts.conf"
       '';
     };
   };
