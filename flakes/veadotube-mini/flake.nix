@@ -12,7 +12,10 @@
       pname = "veadotube-mini";
       version = "1.0";
 
-      src = ./veadotube-mini-linux-x64.zip;
+      src = pkgs.fetchurl {
+        url = "https://drive.google.com/uc?export=download&id=1QAQm77pUtHlkwFsoCSwf3UXSA56Ul2Vf";
+        sha256 = "0000000000000000000000000000000000000000000000000000";
+      }
 
       nativeBuildInputs = [
         pkgs.unzip
