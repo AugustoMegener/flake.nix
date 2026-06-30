@@ -23,19 +23,40 @@
         pkgs.autoPatchelfHook
       ];
 
-      buildInputs = [
-        pkgs.stdenv.cc.cc.lib
-        pkgs.glib
-        pkgs.zlib
-        pkgs.libGL
-        pkgs.xorg.libX11
-        pkgs.xorg.libXcursor
-        pkgs.xorg.libXi
-        pkgs.xorg.libXrandr
-        pkgs.freetype
-        pkgs.alsa-lib
-        pkgs.dbus
-      ];
+buildInputs = [
+  pkgs.stdenv.cc.cc.lib
+  pkgs.glib
+  pkgs.zlib
+
+  pkgs.libGL
+  pkgs.libdrm
+  pkgs.vulkan-loader
+
+  pkgs.xorg.libX11
+  pkgs.xorg.libXcursor
+  pkgs.xorg.libXi
+  pkgs.xorg.libXrandr
+  pkgs.xorg.libXtst
+  pkgs.xorg.libXss
+
+  pkgs.libxkbcommon
+  pkgs.fribidi
+
+  pkgs.wayland
+  pkgs.wayland-protocols
+  pkgs.libdecor
+  pkgs.libinput
+
+  pkgs.pipewire
+  pkgs.pulseaudio
+  pkgs.alsa-lib
+  pkgs.jack2
+
+  pkgs.libusb1
+  pkgs.sndio
+
+  pkgs.liburing
+];
 
       unpackPhase = ''
         unzip "$src"
