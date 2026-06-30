@@ -6,9 +6,11 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
 
+    icon = ./icon.png;
+
     desktopItem = pkgs.makeDesktopItem {
       name = "veadotube-mini";
-      desktopName = "Veadotube Mini";
+      desktopName = "veadotube mini";
       comment = "Avatar app for VTubing";
       exec = "veadotube-mini";
       icon = "veadotube-mini";
@@ -23,8 +25,6 @@
         url = "https://github.com/AugustoMegener/flake.nix/releases/download/flake-input/veadotube-mini-linux-x64.zip";
         sha256 = "sha256:247802f6784c4ebefacdabe68fc93399d4f23b0585752275944a71dbac809eb0";
       };
-
-      iconFile = ./icon.png;
 
       nativeBuildInputs = [
         pkgs.unzip
@@ -90,7 +90,7 @@
         ln -s ${desktopItem}/share/applications/*.desktop $out/share/applications/
 
         mkdir -p $out/share/icons/hicolor/256x256/apps
-        cp ${iconFile} $out/share/icons/hicolor/256x256/apps/veadotube-mini.png
+        cp ${icon} $out/share/icons/hicolor/256x256/apps/veadotube-mini.png
       '';
     };
   };
