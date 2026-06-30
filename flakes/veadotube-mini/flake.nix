@@ -32,7 +32,7 @@
         pkgs.libGL
         pkgs.libGLU
         pkgs.libglvnd
-        pkgs.libglvnd-egl
+        pkgs.libglvnd
 
         pkgs.mesa
         pkgs.mesa.drivers
