@@ -34,8 +34,7 @@
 
         pkgs.mesa
         pkgs.mesa.drivers
-        pkgs.mesa.libgles
-
+        pkgs.libgbm
         pkgs.vulkan-loader
         pkgs.libdrm
 
