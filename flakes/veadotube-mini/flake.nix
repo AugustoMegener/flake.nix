@@ -1,4 +1,5 @@
 {
+{
   description = "Veadotube Mini";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   outputs = { self, nixpkgs }:
@@ -16,7 +17,6 @@
       nativeBuildInputs = [
         pkgs.unzip
         pkgs.makeWrapper
-        pkgs.patchelf
         pkgs.autoPatchelfHook
       ];
       buildInputs = [
@@ -51,10 +51,15 @@
         pkgs.xorg.libXtst
       ];
 
+      autoPatchelfIgnoreMissingDeps = [
+        "libsteam_api.so"
+        "libGLES_CM.so.1"
+      ];
+
       unpackPhase = ''
         unzip "$src"
       '';
-installPhase = ''
+      installPhase = ''
         mkdir -p $out
         cp -r ./* $out/
         chmod -R u+w $out
@@ -62,11 +67,6 @@ installPhase = ''
         mkdir -p $out/bin
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
           --chdir $out
-      '';
-
-      preFixup = ''
-        patchelf --remove-needed libsteam_api.so $out/lib/sdl3.so
-        patchelf --remove-needed libGLES_CM.so.1 $out/lib/sdl3.so
       '';
     };
   };
