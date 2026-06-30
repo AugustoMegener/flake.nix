@@ -13,8 +13,8 @@
       version = "1.0";
 
       src = pkgs.fetchurl {
-        url = "https://drive.google.com/uc?export=download&id=1QAQm77pUtHlkwFsoCSwf3UXSA56Ul2Vf";
-        sha256 = "sha256-ucRz/rCGi+rYbCctPhE0Yq1qZlp+fdNiuDyYTXXld0Q=";
+        url = "https://github.com/AugustoMegener/flake.nix/releases/download/flake-input/veadotube-mini-linux-x64.zip";
+        sha256 = "sha256:247802f6784c4ebefacdabe68fc93399d4f23b0585752275944a71dbac809eb0";
       };
 
       nativeBuildInputs = [
