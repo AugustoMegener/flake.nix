@@ -549,6 +549,7 @@
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_9",
         "quickshell": "quickshell_2",
+        "veadotube-mini": "veadotube-mini",
         "walker": "walker",
         "zen-browser": "zen-browser"
       }
@@ -613,6 +614,22 @@
         "repo": "default-linux",
         "type": "github"
       }
+    },
+    "veadotube-mini": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "./flakes/veadotube-mini",
+        "type": "path"
+      },
+      "original": {
+        "path": "./flakes/veadotube-mini",
+        "type": "path"
+      },
+      "parent": []
     },
     "walker": {
       "inputs": {

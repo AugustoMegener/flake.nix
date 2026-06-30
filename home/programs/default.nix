@@ -22,7 +22,7 @@
     ./quickshell.nix
     ./aseprite.nix
     ./godot.nix
-    ./veadotube-mini
+    ./veadotube-mini.nix
     ./flashpoint.nix
   ];
 }
