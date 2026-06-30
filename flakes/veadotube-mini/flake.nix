@@ -59,7 +59,7 @@
       unpackPhase = ''
         unzip "$src"
       '';
-      installPhase = ''
+installPhase = ''
         mkdir -p $out
         cp -r ./* $out/
         chmod -R u+w $out
@@ -67,7 +67,7 @@
         mkdir -p $out/bin
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
           --chdir $out \
-          --set DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
+          --prefix LD_LIBRARY_PATH : "${pkgs.icu}/lib"
       '';
     };
   };
