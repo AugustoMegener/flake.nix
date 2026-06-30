@@ -42,7 +42,7 @@ imports = [
   };
 
   systemd.user.services.swaync = {
-    Unit.Description = "Swaync notification daemon";
+    Unit.Description = "Swaync otification daemon";
     Install.WantedBy = lib.mkForce [ ];
   };
 
