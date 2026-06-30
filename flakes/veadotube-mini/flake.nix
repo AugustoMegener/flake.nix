@@ -16,6 +16,7 @@
       nativeBuildInputs = [
         pkgs.unzip
         pkgs.makeWrapper
+        pkgs.patchelf
         pkgs.autoPatchelfHook
       ];
       buildInputs = [
@@ -50,11 +51,6 @@
         pkgs.xorg.libXtst
       ];
 
-      autoPatchelfIgnoreMissing = [
-        "libsteam_api.so"
-        "libGLES_CM.so.1"
-      ];
-
       unpackPhase = ''
         unzip "$src"
       '';
@@ -68,7 +64,8 @@
       '';
 
       preFixup = ''
-        addAutoPatchelfSearchPath $out/lib
+        patchelf --remove-needed libsteam_api.so $out/lib/sdl3.so || true
+        patchelf --remove-needed libGLES_CM.so.1 $out/lib/sdl3.so || true
       '';
     };
   };
