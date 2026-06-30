@@ -54,9 +54,10 @@
       unpackPhase = ''
         unzip "$src"
       '';
-      installPhase = ''
+installPhase = ''
         mkdir -p $out
         cp -r ./* $out/
+        chmod -R u+w $out
         chmod +x $out/veadotube-mini
         mkdir -p $out/bin
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
@@ -64,8 +65,8 @@
       '';
 
       preFixup = ''
-        patchelf --remove-needed libsteam_api.so $out/lib/sdl3.so || true
-        patchelf --remove-needed libGLES_CM.so.1 $out/lib/sdl3.so || true
+        patchelf --remove-needed libsteam_api.so $out/lib/sdl3.so
+        patchelf --remove-needed libGLES_CM.so.1 $out/lib/sdl3.so
       '';
     };
   };
