@@ -29,8 +29,12 @@
         pkgs.zlib
 
         pkgs.libGL
-        pkgs.libdrm
+        pkgs.libgbm
+        pkgs.mesa
+        pkgs.mesa.drivers
+
         pkgs.vulkan-loader
+        pkgs.libdrm
 
         pkgs.libxkbcommon
         pkgs.fribidi
@@ -47,7 +51,6 @@
 
         pkgs.libusb1
         pkgs.sndio
-
         pkgs.liburing
 
         pkgs.xorg.libX11
@@ -55,6 +58,10 @@
         pkgs.xorg.libXi
         pkgs.xorg.libXrandr
         pkgs.xorg.libXtst
+      ];
+
+      autoPatchelfIgnoreMissing = [
+        "libsteam_api.so"
       ];
 
       unpackPhase = ''
