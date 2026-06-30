@@ -49,10 +49,9 @@
         pkgs.xorg.libXrandr
         pkgs.xorg.libXtst
       ];
-      autoPatchelfIgnoreMissing = [
-        "libsteam_api.so"
-        "libGLES_CM.so.1"
-      ];
+
+      dontAutoPatchelf = true;
+
       unpackPhase = ''
         unzip "$src"
       '';
@@ -64,8 +63,10 @@
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
           --chdir $out
       '';
-      preFixup = ''
+
+      postFixup = ''
         addAutoPatchelfSearchPath $out/lib
+        autoPatchelf --ignore-missing libsteam_api.so --ignore-missing libGLES_CM.so.1 $out
       '';
     };
   };
