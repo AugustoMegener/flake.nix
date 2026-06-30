@@ -20,6 +20,21 @@
       nativeBuildInputs = [
         pkgs.unzip
         pkgs.makeWrapper
+        pkgs.autoPatchelfHook
+      ];
+
+      buildInputs = [
+        pkgs.stdenv.cc.cc.lib
+        pkgs.glib
+        pkgs.zlib
+        pkgs.libGL
+        pkgs.xorg.libX11
+        pkgs.xorg.libXcursor
+        pkgs.xorg.libXi
+        pkgs.xorg.libXrandr
+        pkgs.freetype
+        pkgs.alsa-lib
+        pkgs.dbus
       ];
 
       unpackPhase = ''
@@ -28,16 +43,13 @@
 
       installPhase = ''
         mkdir -p $out
-
         cp -r ./* $out/
 
         chmod +x $out/veadotube-mini
 
         mkdir -p $out/bin
-
         makeWrapper $out/veadotube-mini $out/bin/veadotube-mini \
-          --chdir $out \
-          --prefix LD_LIBRARY_PATH : $out/lib
+          --chdir $out
       '';
     };
   };
