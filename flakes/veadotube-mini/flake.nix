@@ -27,38 +27,27 @@ buildInputs = [
   pkgs.stdenv.cc.cc.lib
   pkgs.glib
   pkgs.zlib
-
   pkgs.libGL
   pkgs.libGLU
   pkgs.libglvnd
-
+  pkgs.libglvnd.dev
   pkgs.mesa
-  pkgs.mesa.drivers
   pkgs.libgbm
   pkgs.vulkan-loader
   pkgs.libdrm
-
-  pkgs.libglvnd.dev
-  pkgs.mesa.drivers
-  pkgs.mesa
-
   pkgs.libxkbcommon
   pkgs.fribidi
   pkgs.libXScrnSaver
-
   pkgs.wayland
   pkgs.wayland-protocols
   pkgs.libdecor
-
   pkgs.pipewire
   pkgs.pulseaudio
   pkgs.alsa-lib
   pkgs.jack2
-
   pkgs.libusb1
   pkgs.sndio
   pkgs.liburing
-
   pkgs.xorg.libX11
   pkgs.xorg.libXcursor
   pkgs.xorg.libXi
