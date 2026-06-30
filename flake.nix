@@ -27,10 +27,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-flashpoint = {
-  url = "path:./flakes/flashpoint";
-  inputs.nixpkgs.follows = "nixpkgs";  # <- isso
-};
+    flashpoint = {
+      url = "path:./flakes/flashpoint";
+      inputs.nixpkgs.follows = "nixpkgs";  
+    };
+
+    veadotube-mini = {
+      url = "path:./flakes/veadotube-mini";
+      inputs.nixpkgs.follows = "nixpkgs";  
+    };
 
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
   };
@@ -49,17 +54,14 @@ flashpoint = {
       hyprland-config,
       hytale-launcher,
       flashpoint,
+      veadotube-mini,
       ...
     }@inputs:
     {
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-{
-  home-manager.users.kito.home.packages = [
-    flashpoint.packages.x86_64-linux.flashpoint
-  ];
-}
+
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {

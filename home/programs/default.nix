@@ -23,5 +23,6 @@
     ./aseprite.nix
     ./godot.nix
     ./veadotube-mini
+    ./flashpoint.nix
   ];
 }
