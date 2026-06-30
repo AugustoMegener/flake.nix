@@ -1,4 +1,5 @@
 {
+
   description = "Veadotube Mini";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -29,7 +30,10 @@
         pkgs.zlib
 
         pkgs.libGL
-        pkgs.libgbm
+        pkgs.libGLU
+        pkgs.libglvnd
+        pkgs.libglvnd-egl
+
         pkgs.mesa
         pkgs.mesa.drivers
 
