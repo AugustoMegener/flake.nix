@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  programs.libqalculate.enable = true;
-
+  home.packages = [ pkgs.libqalculate ];
 }
