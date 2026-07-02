@@ -29,6 +29,6 @@
 
       imports = with builtins;
         map
-          (fn: ./${fn})
-          (attrNames (readDir ./../programs));
+          (fn: ./modules/${fn})
+          (attrNames (readDir ./modules));
 }
