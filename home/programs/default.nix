@@ -1,6 +1,6 @@
 { ... }:
 {
-  imports = [
+  /*imports = [
     ./git.nix
     ./github.nix
     ./starship.nix
@@ -24,5 +24,11 @@
     ./godot.nix
     ./veadotube-mini.nix
     ./flashpoint.nix
-  ];
+  ];*/
+
+
+      imports = with builtins;
+        map
+          (fn: ./${fn})
+          (attrNames (readDir ./../programs));
 }
