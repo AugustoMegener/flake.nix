@@ -5,7 +5,7 @@ let
 in {
   imports =
     map
-      (fn: ./modules/${fn})
+      (fn: ./items/${fn})
       (filter (fn: match ".*\\.nix" fn != null)
-        (attrNames (builtins.readDir ./modules)));
+        (attrNames (builtins.readDir ./items)));
 }

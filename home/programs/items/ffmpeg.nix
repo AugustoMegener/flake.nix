@@ -1,0 +1,4 @@
+{ ... }:
+{
+  programs.ffmpeg.enable = true;
+}
