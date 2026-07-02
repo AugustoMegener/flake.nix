@@ -13,7 +13,6 @@
 {
   imports = [
     ./greetd
-    ./sys-configs
     ./hardware-configuration.nix
   ];
 

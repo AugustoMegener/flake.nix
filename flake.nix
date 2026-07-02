@@ -66,6 +66,7 @@
         modules = [
 
           ./configuration.nix
+          ./sys-configs
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
