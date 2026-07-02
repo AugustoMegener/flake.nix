@@ -1,34 +1,11 @@
 { ... }:
-{
-  /*imports = [
-    ./git.nix
-    ./github.nix
-    ./starship.nix
-    ./zsh.nix
-    ./tmux.nix
-    ./yazi.nix
-    ./kitty.nix
-    ./fastfetch.nix
-    ./obsidian.nix
-    ./zen-browser.nix
-    ./bolchevim.nix
-    ./fzf.nix
-    ./zoxide.nix
-    ./dysk.nix
-    ./bat.nix
-    ./obs-studio.nix
-    ./openrgb.nix
-    ./walker.nix
-    ./quickshell.nix
-    ./aseprite.nix
-    ./godot.nix
-    ./veadotube-mini.nix
-    ./flashpoint.nix
-  ];*/
 
-
-      imports = with builtins;
-        map
-          (fn: ./modules/${fn})
-          (attrNames (readDir ./modules));
+let
+  inherit (builtins) attrNames filter match;
+in {
+  imports =
+    map
+      (fn: ./modules/${fn})
+      (filter (fn: match ".*\\.nix" fn != null)
+        (attrNames (builtins.readDir ./modules)));
 }
