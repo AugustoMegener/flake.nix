@@ -38,6 +38,8 @@
     };
 
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
+
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs =
@@ -55,6 +57,7 @@
       hytale-launcher,
       flashpoint,
       veadotube-mini,
+      sops-nix,
       ...
     }@inputs:
     {
@@ -63,6 +66,7 @@
         modules = [
 
           ./configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

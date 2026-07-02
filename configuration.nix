@@ -13,6 +13,7 @@
 {
   imports = [
     ./greetd
+    ./sys-configs
     ./hardware-configuration.nix
   ];
 
@@ -199,6 +200,8 @@
     sansSerif = [ "Domine" ];
     monospace = [ "GoMono Nerd Font" ];
   };
+
+
 
 # Some programs need SUID wrappers, can be configured further or are
 # started in user sessions.
