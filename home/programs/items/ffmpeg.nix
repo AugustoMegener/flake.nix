@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  programs.ffmpeg.enable = true;
+  home.packages = [ pkgs.ffmpeg ];
 }
