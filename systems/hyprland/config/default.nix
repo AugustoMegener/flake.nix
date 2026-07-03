@@ -17,6 +17,5 @@
 
   home.packages = with pkgs; [
     hyprshutdown
-    inputs.bolcshell.packages.${pkgs.system}.default
   ];
 }

@@ -1,15 +1,34 @@
-#!/bin/sh
-
+MSG=""
 MODE=${1:-test}
 
-cd ~/System/
+shift || true
+
+while getopts "m:" opt; do
+  case "$opt" in
+    m)
+      MSG=$(printf '%s' "$OPTARG" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$MODE" = "switch" ] && [ -z "$MSG" ]; then
+    echo -e "\033[1;31mError: Can not build in $MODE mode without a commit message. Try -m \"<commit msg>\"\033[0m"
+    exit 1
+fi
+
+cd ~/System/ || exit 1
 
 git add .
-git commit -m "nixos rebuild: switch"
-git push
 
 sudo nixos-rebuild "$MODE" --flake ~/System#PrimaryOS
 
-if [ $? -ne 0 ] || [ "$MODE" != "switch" ]; then
-    echo -e "\n\n\033[1;33mBuilded in $MODE mode. Do not forget to run rebuild-system switch to keep changes persistently\033[0m"
+if [ $? -eq 0 ] && [ "$MODE" = "switch" ]; then
+  git commit -m "$MSG" && git push
+fi
+
+if [ "$MODE" != "switch" ]; then
+    echo -e "\033[1;33mBuilded in $MODE mode. Do not forget switch to persist changes\033[0m"
 fi
