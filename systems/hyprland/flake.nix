@@ -4,6 +4,7 @@
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
         home-manager.url = "github:nix-community/home-manager/master";
+        bolcshell.url = "github:AugustoMegener/bolcshell"; 
     };
 
     outputs =
@@ -22,6 +23,8 @@
             home-manager.lib.homeManagerConfiguration {
                 pkgs = import nixpkgs { inherit system; };
                 extraSpecialArgs = { inherit inputs; };
+
+                extraPackages = [  inputs.bolcshell ]; 
 
                 modules = [
                     ./config
