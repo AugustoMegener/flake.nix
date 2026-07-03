@@ -24,7 +24,7 @@
                 pkgs = import nixpkgs { inherit system; };
                 extraSpecialArgs = { inherit inputs; };
 
-                home.packages = [  inputs.bolcshell ]; 
+                home.packages = [  inputs.bolcshell.bolcshell ]; 
 
                 modules = [
                     ./config
