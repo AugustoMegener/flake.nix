@@ -16,9 +16,10 @@
   forAllSystems = nixpkgs.lib.genAttrs systems;
   in
   {
-    homeModules.default = ./config;
-    home.packages = [ inputs.bolcshell.packages.${nixpkgs.system}.default ];
-
+    homeModules.default = { pkgs, ... }: {
+      imports = [ ./config ];
+      home.packages = [ inputs.bolcshell.packages.${pkgs.system}.default ];
+    };
 
     homeConfigurations = forAllSystems (
         system:

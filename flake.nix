@@ -12,7 +12,6 @@
     };
 
     astal.url = "github:aylur/astal";
-    ags.url = "github:aylur/ags";
 
     hyprland-config = {
       url = "path:./systems/hyprland";
@@ -51,7 +50,6 @@
       elephant,
       walker,
       astal,
-      ags,
       nixgl,
       hyprland-config,
       hytale-launcher,

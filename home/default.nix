@@ -3,7 +3,6 @@
     pkgs,
     lib,
     inputs,
-    ags,
     ...
 }:
 {
@@ -12,10 +11,8 @@ imports = [
   ./scripts
   ./programs
   ./xdg
-  ./waybar/config.nix
   inputs.hyprland-config.homeModules.default
   ./swaync/config.nix
-  inputs.ags.homeManagerModules.default
   inputs.walker.homeManagerModules.default
 ];
 

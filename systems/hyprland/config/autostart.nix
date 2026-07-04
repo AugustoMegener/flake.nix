@@ -3,7 +3,8 @@
   wayland.windowManager.hyprland.settings = {
     "exec-once" = [
       "swaync"
-      "waybar & obsidian &"
+      "bolcshell &" 
+      "obsidian &"
       "systemd-run --user --scope --slice=app elephant"
       "walker --gapplication-service"
      "/usr/lib/xdg-desktop-portal-hyprland"
