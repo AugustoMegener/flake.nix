@@ -1,0 +1,9 @@
+keys:
+  - &admin_kito age1x2wd76vllttkedkm59umnt58jxaykgcy0u45th29mc0cn3lc6qds46qhjz
+  - &host_sputnik-i age17wckzystrpqsx8knqcnq8c2qmka6d88vqy9cvgg8dkszjz3m9s9qlj36er
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *admin_kito
+          - *host_sputnik-i

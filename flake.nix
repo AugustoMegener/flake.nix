@@ -70,6 +70,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.sharedModules = [
+              sops-nix.homeManagerModules.sops
+            ];
             home-manager.users.kito = import ./home;
           }
           {
