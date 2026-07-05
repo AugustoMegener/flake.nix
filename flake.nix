@@ -39,6 +39,7 @@
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
 
     sops-nix.url = "github:Mic92/sops-nix";
+    audiorelay.url = "github:AugustoMegener/audiorelay-flake";
   };
 
   outputs =
