@@ -17,6 +17,7 @@
 
     permission = .*/grim, screencopy, allow
     permission = .*/\.xdg-desktop-portal-hyprland, screencopy, allow
+    permission = .*/\.xdg-desktop-portal-hyprland-wrapped, screencopy, allow
     permission = .*/hyprpm, plugin, allow
     permission = .*/hyprshot, screencopy, allow
     permission = .*/hypridle, screencopy, allow
