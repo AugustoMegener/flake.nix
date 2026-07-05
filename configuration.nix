@@ -179,6 +179,7 @@
     brightnessctl
     xdg-desktop-portal
     openrgb
+  alsa-plugins
   ];
 
   
