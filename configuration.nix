@@ -215,6 +215,11 @@
 # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 59100 ];
+    allowedUDPPorts = [ 59100 59200 ];
+  };
 # Open ports in the firewall.
 # networking.firewall.allowedTCPPorts = [ ... ];
 # networking.firewall.allowedUDPPorts = [ ... ];
