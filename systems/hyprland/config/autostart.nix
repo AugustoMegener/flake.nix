@@ -2,8 +2,8 @@
 {
   wayland.windowManager.hyprland.settings = {
     "exec-once" = [
+      "bolcshell --daemonize" 
       "swaync"
-      "bolcshell &" 
       "obsidian &"
       "systemd-run --user --scope --slice=app elephant"
       "walker --gapplication-service"
