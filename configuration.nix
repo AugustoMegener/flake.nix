@@ -84,7 +84,23 @@
 # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
 # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
+
+environment.etc."asound.conf".text = ''
+  pcm.audiorelay_capture {
+    type pipewire
+    target "alsa_output.pci-0000_00_1b.0.analog-stereo"
+  }
+  pcm.audiorelay_playback {
+    type pipewire
+    target "audiorelay_out"
+  }
+  pcm.!default {
+    type asym
+    playback.pcm "audiorelay_playback"
+    capture.pcm "audiorelay_capture"
+  }
+'';
 
 # Enable sound.
 # services.pulseaudio.enable = true;
@@ -94,7 +110,62 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+extraConfig.pipewire."10-remap-source" = {
+  "context.modules" = [
+    {
+      name = "libpipewire-module-loopback";
+      args = {
+        "capture.props" = { "node.target" = "@DEFAULT_SINK@"; };
+        "playback.props" = { "media.class" = "Audio/Source"; "node.name" = "system_audio_capture"; };
+      };
+    }
+  ];
+};
+
+
   };
+services.pipewire.extraConfig.pipewire."91-audiorelay-sinks" = {
+  "context.objects" = [
+    {
+      factory = "adapter";
+      args = {
+        "factory.name" = "support.null-audio-sink";
+        "node.name" = "audiorelay_out";
+        "node.description" = "AudioRelay Output";
+        "media.class" = "Audio/Sink";
+        "audio.position" = "FL,FR";
+      };
+    }
+  ];
+};
+
+services.pipewire.extraConfig.pipewire."92-audiorelay-mic" = {
+  "context.modules" = [
+    {
+      name = "libpipewire-module-loopback";
+      args = {
+        "node.description" = "AudioRelay Mic";
+        "capture.props" = {
+          "node.name" = "audiorelay_mic";
+          "media.class" = "Audio/Source";
+          "node.target" = "audiorelay_out";
+        };
+      };
+    }
+    {
+      name = "libpipewire-module-loopback";
+      args = {
+        "node.description" = "System Audio Capture";
+        "capture.props" = {
+          "node.name" = "system_audio_capture";
+          "media.class" = "Audio/Source";
+          "node.target" = "@DEFAULT_SINK@";
+        };
+      };
+    }
+  ];
+};
 
   services.pipewire.wireplumber.extraConfig."10-bluez" = {
     "monitor.bluez.properties" = {
