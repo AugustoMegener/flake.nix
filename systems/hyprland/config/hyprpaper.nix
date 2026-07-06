@@ -7,7 +7,7 @@
       wallpaper = [
         {
           monitor = "VGA-1";
-          path = "/home/kito/Pictures/Backgrounds/bg-1.png";
+         path = "/home/kito/Pictures/Backgrounds/bg-1.png";
         }
       ];
       splash = false;
