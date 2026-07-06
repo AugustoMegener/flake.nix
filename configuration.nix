@@ -149,7 +149,8 @@ services.pipewire.extraConfig.pipewire."92-audiorelay-mic" = {
         "capture.props" = {
           "node.name" = "audiorelay_mic";
           "media.class" = "Audio/Source";
-          "node.target" = "audiorelay_out";
+          "target.object" = "audiorelay_out";
+          "stream.capture.sink" = true;
         };
       };
     }
@@ -160,7 +161,8 @@ services.pipewire.extraConfig.pipewire."92-audiorelay-mic" = {
         "capture.props" = {
           "node.name" = "system_audio_capture";
           "media.class" = "Audio/Source";
-          "node.target" = "@DEFAULT_SINK@";
+          "target.object" = "@DEFAULT_SINK@";
+          "stream.capture.sink" = true;
         };
       };
     }
