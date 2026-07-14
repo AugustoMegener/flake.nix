@@ -221,6 +221,7 @@
 # You can use https://search.nixos.org/ to find more packages (and options).
 
   environment.systemPackages = with pkgs; [ 
+    mesa-demos
     brightnessctl
     xdg-desktop-portal
     openrgb
@@ -228,6 +229,7 @@
   ];
 
   
+  services.flatpak.enable = true; 
 
   services.dbus.packages = with pkgs; [
     xdg-desktop-portal
@@ -246,7 +248,7 @@
     monospace = [ "GoMono Nerd Font" ];
   };
 
-
+programs.fuse.enable = true;
 
 # Some programs need SUID wrappers, can be configured further or are
 # started in user sessions.
