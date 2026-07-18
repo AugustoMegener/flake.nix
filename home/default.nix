@@ -13,7 +13,6 @@ imports = [
   ./xdg
   inputs.hyprland-config.homeModules.default
   ./swaync/config.nix
-  inputs.walker.homeManagerModules.default
 ];
 
 

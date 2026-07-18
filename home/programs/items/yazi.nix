@@ -134,7 +134,7 @@ in
     };
 
     theme = {
-      border_style = {
+      border-style = {
         fg = "#aa906d";
       };
 

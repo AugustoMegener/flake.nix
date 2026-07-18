@@ -181,9 +181,6 @@
   services.xserver.enable = true;
 
 
-  programs.walker = {
-    enable = true;
-  };
   services.udev.packages = [ pkgs.openrgb ];
 # services.displayManager.sddm.enable = true;
 

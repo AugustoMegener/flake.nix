@@ -13,7 +13,7 @@
       "$mainMod, V, togglefloating,"
       "$mainMod, BACKSLASH, exec, walker"
       "$mainMod, P, pseudo,"
-      "$mainMod, J, togglesplit,"
+      "bind = $mainMod, J, layoutmsg, togglesplit"
       "$mainMod, G, exec, hyprpicker -a"
       "$mainMod, left, movefocus, l"
       "$mainMod, right, movefocus, r"

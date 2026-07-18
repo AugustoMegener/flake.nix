@@ -19,7 +19,7 @@ xdg-portal-termfilechooser = pkgs.stdenv.mkDerivation rec {
     owner = "hunkyburrito";
     repo = "xdg-desktop-portal-termfilechooser";
     rev = "main";
-    sha256 = "sha256-nGCxCGYfMMHrL9pdsgS8fl54x0vvx8Ulp48X99j90gc=";
+    sha256 = "sha256-zk/zUbq+fa977wuT/yuJ+bBawuTXKVJwLj2G8ITjMfU=";
   };
   nativeBuildInputs = [ pkgs.meson pkgs.ninja pkgs.pkg-config pkgs.scdoc ];
   buildInputs = [ pkgs.glib pkgs.dbus pkgs.xdg-desktop-portal pkgs.cmake pkgs.inih pkgs.json-glib pkgs.systemd ];

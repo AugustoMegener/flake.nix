@@ -15,6 +15,6 @@
     wl-clipboard
     prismlauncher
     inkscape
-    /*inputs.hytale-launcher.packages.x86_64-linux.default*/
+    inputs.hytale-launcher.packages.x86_64-linux.default
   ];
 }

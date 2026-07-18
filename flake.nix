@@ -3,13 +3,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    elephant.url = "github:abenz1267/elephant";
     nixgl.url = "github:nix-community/nixGL";
 
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
 
     astal.url = "github:aylur/astal";
 
@@ -48,8 +43,6 @@
       nixpkgs,
       home-manager,
       zen-browser,
-      elephant,
-      walker,
       astal,
       nixgl,
       hyprland-config,
@@ -75,22 +68,6 @@
               sops-nix.homeManagerModules.sops
             ];
             home-manager.users.kito = import ./home;
-          }
-          {
-            disabledModules = [ "services/misc/elephant.nix" ];
-          }
-          walker.nixosModules.default
-          {
-            nix.settings = {
-              extra-substituters = [
-                "https://walker.cachix.org"
-                "https://walker-git.cachix.org"
-              ];
-              extra-trusted-public-keys = [
-                "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
-                "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
-              ];
-            };
           }
           {
             nixpkgs.overlays = [
