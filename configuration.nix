@@ -259,11 +259,19 @@ programs.fuse.enable = true;
 # List services that you want to enable:
 
 # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      PubkeyAuthentication = true;
+    };
+  };
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 59100 ];
+    allowedTCPPorts = [ 59100 22 ];
     allowedUDPPorts = [ 59100 59200 ];
   };
 # Open ports in the firewall.
