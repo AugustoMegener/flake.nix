@@ -1,4 +1,4 @@
-{ stdenvNoCC, fetchFromGitHub }:
+{ stdenvNoCC, fetchFromGitHub, hyprcursor }:
 
 stdenvNoCC.mkDerivation {
   pname = "kny-hyprcursor";
@@ -8,13 +8,19 @@ stdenvNoCC.mkDerivation {
     owner = "AugustoMegener";
     repo = "kny-hyprcursor";
     rev = "main";
-    hash = "sha256-NogT56G151NwLt3sYxUFBbZej5/hwl7V99+HMU42EAA=";
+    hash = "sha256-q5AXpka4PQUZY+MoDJGdxzMxvAdjgZp/FEbP+qUVYqA=";
   };
+
+  nativeBuildInputs = [ hyprcursor ];
 
   dontBuild = true;
 
   installPhase = ''
-    mkdir -p $out/share/icons/kny-hyprcursor
-    cp -r $src/* $out/share/icons/kny-hyprcursor/
+    mkdir -p $out/share/icons
+    hyprcursor-util -c $src -o $out/share/icons
+
+    shopt -s nullglob
+    themeDirs=("$out"/share/icons/theme_*)
+    mv "''${themeDirs[0]}" "$out/share/icons/kny-hyprcursor"
   '';
 }
