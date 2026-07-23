@@ -6,7 +6,7 @@
     enable = true;
     package = pkgs.callPackage ../../../pkgs/kny-hyprcursor.nix { };
     name = "kny-hyprcursor";
-    size = 240;
+    size = 30;
 
     hyprcursor.enable = true;
   };
