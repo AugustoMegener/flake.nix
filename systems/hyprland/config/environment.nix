@@ -3,8 +3,7 @@
   wayland.windowManager.hyprland.settings = {
     env = [
     "TMUX_TMPDIR,/run/user/1000"
-      "XCURSOR_SIZE,12"
-      "HYPRCURSOR_SIZE,12"
+      "XCURSOR_SIZE,30"
       "GTK_THEME,Adwaita:dark"
     "PATH,${config.home.profileDirectory}/bin:$PATH"
     ];
@@ -19,6 +18,7 @@
     permission = .*/\.xdg-desktop-portal-hyprland, screencopy, allow
     permission = .*/\.xdg-desktop-portal-hyprland-wrapped, screencopy, allow
     permission = .*/hyprpm, plugin, allow
+    permission = .*/hyprctl, plugin, allow
     permission = .*/hyprshot, screencopy, allow
     permission = .*/hypridle, screencopy, allow
     permission = .*/hyprlock, screencopy, allow

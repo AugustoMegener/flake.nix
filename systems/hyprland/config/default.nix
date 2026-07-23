@@ -13,6 +13,7 @@
     ./rules.nix
     ./hyprlock.nix
     ./hypridle.nix
+    ./hypr-dynamic-cursors
   ];
 
   home.packages = with pkgs; [
