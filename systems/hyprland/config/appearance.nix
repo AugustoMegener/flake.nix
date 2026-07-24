@@ -3,7 +3,7 @@
   wayland.windowManager.hyprland.settings = {
     env = [
       "HYPRCURSOR_THEME,kny-hyprcursor"
-      "HYPRCURSOR_SIZE,30"
+      "HYPRCURSOR_SIZE,28"
     ];
     general = {
       gaps_in = 3;

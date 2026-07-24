@@ -3,7 +3,7 @@
   wayland.windowManager.hyprland.settings = {
     env = [
     "TMUX_TMPDIR,/run/user/1000"
-      "XCURSOR_SIZE,30"
+      "XCURSOR_SIZE,28"
       "GTK_THEME,Adwaita:dark"
     "PATH,${config.home.profileDirectory}/bin:$PATH"
     ];

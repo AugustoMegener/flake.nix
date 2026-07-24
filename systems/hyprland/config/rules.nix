@@ -2,8 +2,8 @@
 {
   wayland.windowManager.hyprland.extraConfig = ''
     windowrule {
-      name = obsidian-borderles
-      match:class = electron
+      name = obsidian-borderless
+      match:class = obsidian
       border_color = rgba(0)
       border_size = 0
     }
