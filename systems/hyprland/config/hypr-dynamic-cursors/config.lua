@@ -1,3 +1,4 @@
+
 hl.config { plugin = { dynamic_cursors = {
 
     -- enables the plugin

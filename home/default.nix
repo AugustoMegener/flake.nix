@@ -7,7 +7,6 @@
 }:
 {
 imports = [
-  ./packages
   ./scripts
   ./programs
   ./xdg
