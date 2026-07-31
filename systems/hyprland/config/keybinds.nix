@@ -9,7 +9,7 @@
       "$mainMod SHIFT, V, exec, walker -m clipboard"
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
-      "$mainMod, E, exec, kitty zsh -ic 'source init-tmux yazi'"
+      "$mainMod, E, exec, dir-open ~"
       "$mainMod, V, togglefloating,"
       "$mainMod, BACKSLASH, exec, walker"
       "$mainMod, P, pseudo,"

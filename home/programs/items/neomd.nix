@@ -7,7 +7,7 @@ let
       owner = "ssp-data";
       repo = "neomd";
       rev = "main";
-      hash = "sha256-fRTqx2JzDCV9lz6pnqwrc4MWHYoTJjLkWjYGtXLA6FI=";
+      hash = "sha256-0bsybsaqWvJB78BIimrVLIbIeloWtBjUkrQcScBkLCI=";
     };
     vendorHash = "sha256-8RFnVKCpmIoZRskq8aHIOnaj7xN33Au4QoQNHhBPmBU=";
     meta = {

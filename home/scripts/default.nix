@@ -9,7 +9,7 @@ let
   init-yazi = pkgs.writeShellScriptBin "init-yazi" (builtins.readFile ./init-yazi.sh);
   tmux-session-finder = pkgs.writeShellScriptBin "tmux-session-finder" (builtins.readFile ./tmux-session-finder.sh);
   yazi-edit = pkgs.writeShellScriptBin "yazi-edit" (builtins.readFile ./yazi-edit.sh);
-  walker-dir-open = pkgs.writeShellScriptBin "walker-dir-open" (builtins.readFile ./walker-dir-open.sh);
+  dir-open = pkgs.writeShellScriptBin "dir-open" (builtins.readFile ./dir-open.sh);
 in
 {
   home.packages = [
@@ -22,6 +22,6 @@ in
     init-yazi
     tmux-session-finder
     yazi-edit
-    walker-dir-open
+    dir-open
   ];
 }

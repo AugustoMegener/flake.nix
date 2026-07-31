@@ -7,7 +7,7 @@
 }:
 {
 imports = [
-  ./scripts
+ ./scripts
   ./programs
   ./xdg
   inputs.hyprland-config.homeModules.default
