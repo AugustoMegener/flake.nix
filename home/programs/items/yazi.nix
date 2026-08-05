@@ -122,22 +122,21 @@ in
     enableZshIntegration = true;
     shellWrapperName = "y";
 
-  
+    keymap = {
+      mgr = {
+        prepend_keymap = [
+          {
+            on = "y";
+            run = [
+              ''shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list''
+              "yank"
+            ];
+          }
+        ];
+      };
+    };
 
     settings = {
-      keymap = {
-        mgr = {
-          prepend_keymap = [
-            {
-              on = "y";
-              run = [
-                ''shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list''
-                "yank"
-              ];
-            }
-          ];
-        };
-      };
 
       opener = {
         edit = [
