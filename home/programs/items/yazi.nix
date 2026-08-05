@@ -131,6 +131,12 @@ in
           }
         ];
       };
+      mgr = {
+        prepend_keymap = {
+          on = "y";
+          run = [ "shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list" "yank" ];
+        };
+      };
     };
 
     theme = {
@@ -142,10 +148,6 @@ in
         marker_marked = {
           fg = "#9595d9";
           bg = "#302b24";
-        };
-        prepend_keymap = {
-          on = "y";
-          run = [ "shell -- for path in %s; do echo "file://$path"; done | wl-copy -t text/uri-list" "yank" ];
         };
       };
 
