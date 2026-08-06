@@ -40,10 +40,6 @@ imports = [
 
   programs.home-manager.enable = true;
 
-  home.activation.gradleJdk = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p $HOME/.gradle/jdks
-    ln -sfn ${pkgs.jdk21} $HOME/.gradle/jdks/jdk-21
-    '';
 
   qt.enable = true;
   home.packages = [ inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default ];
