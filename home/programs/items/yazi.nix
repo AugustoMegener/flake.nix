@@ -150,55 +150,55 @@ in
 
     theme = {
       border-style = {
-        fg = "#aa906d";
+        fg = "#866f50";
       };
 
       mgr = {
         marker_marked = {
           fg = "#9595d9";
-          bg = "#302b24";
+          bg = "#2e261f";
         };
       };
 
       mode = {
         normal_main = {
           bold = true;
-          bg = "#f29554";
-          fg = "#302b24";
+          bg = "#da9a22";
+          fg = "#2e261f";
         };
         select_main = {
           bold = true;
           bg = "#9595d9";
-          fg = "#302b24";
+          fg = "#2e261f";
         };
 
         normal_alt = {
-          bg = "#40392d";
+          bg = "#342c23";
         };
         select_alt = {
-          bg = "#40392d";
+          bg = "#342c23";
         };
         unset_alt = {
-          bg = "#40392d";
+          bg = "#342c23";
         };
         unset_main = {
           bold = true;
-          bg = "#40392d";
+          bg = "#342c23";
         };
       };
 
       indicator = {
         parent = {
-          fg = "#302b24";
-          bg = "#f29554";
+          fg = "#2e261f";
+          bg = "#da9a22";
         };
         current = {
-          fg = "#302b24";
+          fg = "#2e261f";
           bg = "#f25146";
         };
         preview = {
-          fg = "#302b24";
-          bg = "#4396b7";
+          fg = "#2e261f";
+          bg = "#4197b9";
         };
       };
 
@@ -206,7 +206,7 @@ in
         rules = [
           {
             url = "*/";
-            fg = "#aa906d";
+            fg = "#866f50";
             bold = true;
           }
         ];
@@ -222,7 +222,7 @@ in
           {
             name = ".git";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = ".github";
@@ -237,74 +237,79 @@ in
           {
             name = "Desktop";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Developer";
             text = "󰲋";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Vault";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "System";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Documents";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Downloads";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Library";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Movies";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
+          }
+          {
+            name = "Games";
+            text = "󰊴";
+            fg = "#866f50";
           }
           {
             name = "Music";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Pictures";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Public";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             name = "Videos";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
         ];
         conds = [
           {
             "if" = "dir & hovered";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             "if" = "dir";
             text = "";
-            fg = "#aa906d";
+            fg = "#866f50";
           }
           {
             "if" = "!dir";

@@ -3,8 +3,8 @@
   programs.kitty = {
     enable = true;
     settings = {
-      background            = "#302b24";
-      foreground            = "#d5bea1";
+      background            = "#2e261f";
+      foreground            = "#d7c0a3";
       font_family           = "GoMono Nerd Font";
       window_padding_width  = 5;
       confirm_os_window_close = 0;
@@ -13,10 +13,10 @@
       color1  = "#f25146"; # red
       color2  = "#108454"; # green
       color3  = "#da9a22"; # yellow
-      color4  = "#4396b7"; # blue
+      color4  = "#4197b9"; # blue
       color5  = "#6260c1"; # magenta
       color6  = "#23a89d"; # cyan
-      color7  = "#d5bea1"; # white
+      color7  = "#d7c0a3"; # white
 
       color8  = "#46392d"; # bright black
       color9  = "#FB8479"; # bright red
