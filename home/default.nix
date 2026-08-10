@@ -36,7 +36,7 @@ imports = [
     };
   };
 
-
+  home.sessionVariables.TERMINAL = "kitty";
 
   programs.home-manager.enable = true;
 

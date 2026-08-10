@@ -28,6 +28,11 @@ let
       cp ${termfilechooser-config} $out/share/xdg-desktop-portal-termfilechooser/config
     '';
   };
+  
+xdg.terminal-exec = {
+  enable = true;
+  package = pkgs.kitty; # ou o pacote do seu terminal
+};
 
   yazi-kitty = pkgs.stdenv.mkDerivation {
     pname = "yazi-kitty";
