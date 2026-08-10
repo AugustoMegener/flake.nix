@@ -37,13 +37,13 @@ palette = 'gruvbox_dark'
 color_fg0 = '#d7c0a3'
 color_bg1 = '#342c23'
 color_bg3 = '#26211c'
-color_blue = '#6abfd2'
+color_blue = '#4197b9'
 color_aqua = '#689d6a'
 color_green = '#6bc99d'
 color_orange = '#ef8839'
-color_purple = '#8a87d9'
-color_red = '#fb8479'
-color_yellow = '#e2bd60'
+color_purple = '#4a4cba'
+color_red = '#f35044"'
+color_yellow = '#da9a22'
 
 [os]
 disabled = false
