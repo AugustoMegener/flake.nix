@@ -10,7 +10,7 @@
       confirm_os_window_close = 0;
 
       color0  = "#2b2622"; # black
-      color1  = "#f25146"; # red
+      color1  = "#f35044"; # red
       color2  = "#108454"; # green
       color3  = "#da9a22"; # yellow
       color4  = "#4197b9"; # blue
