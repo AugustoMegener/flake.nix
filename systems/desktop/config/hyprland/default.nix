@@ -5,7 +5,7 @@
     ./window-rules
     ./hypr-dynamic-cursors
     ./environment
-    ./appearance.nix
+    ./appearance
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix

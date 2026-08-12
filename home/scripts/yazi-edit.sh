@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TMUX_SESSION_FINDER="$(command -v tmux-session-finder || echo "$SCRIPT_DIR/tmux-session-finder.sh")"
-
 FILE=$(realpath "$@")
 if [[ -d "$FILE" ]]; then
   DIR="$FILE"
@@ -14,26 +11,85 @@ else
   MODE="file"
 fi
 
+find_nvim_pid() {
+  local pane_pid=$1
+  local children
+  children=$(pgrep -P "$pane_pid" 2>/dev/null)
+  for child in $children; do
+    local name cmd
+    name=$(ps -p "$child" -o comm= 2>/dev/null)
+    cmd=$(ps -p "$child" -o cmd= 2>/dev/null)
+    if [[ "$name" == "nvim" ]] && [[ "$cmd" != *"--embed"* ]]; then
+      echo "$child"
+      return
+    fi
+    local found
+    found=$(find_nvim_pid "$child")
+    if [[ -n "$found" ]]; then
+      echo "$found"
+      return
+    fi
+  done
+}
+
+nvim_target() {
+  local pid=$1
+  local cmdline
+  cmdline=$(cat /proc/$pid/cmdline 2>/dev/null | tr '\0' '\n')
+  local last_path
+  last_path=$(echo "$cmdline" | grep -E '^/' | grep -v '^/nix/store' | tail -1)
+  if [[ -n "$last_path" ]]; then
+    echo "$last_path"
+  else
+    readlink /proc/$pid/cwd 2>/dev/null
+  fi
+}
+
+find_session() {
+  local current_session
+  current_session=$(tmux display-message -p '#S' 2>/dev/null)
+
+  while IFS=' ' read -r session pane_pid; do
+    [[ "$session" == "$current_session" ]] && continue
+
+    local nvim_pid
+    nvim_pid=$(find_nvim_pid "$pane_pid")
+    [[ -z "$nvim_pid" ]] && continue
+
+    local open_target
+    open_target=$(nvim_target "$nvim_pid")
+    [[ -z "$open_target" ]] && continue
+
+    if [[ "$MODE" == "file" ]]; then
+      [[ "$open_target" == "$TARGET" ]] && echo "$session" && return
+    else
+      local cwd
+      cwd=$(readlink /proc/$nvim_pid/cwd 2>/dev/null)
+      [[ "$cwd" == "$TARGET" ]] && echo "$session" && return
+    fi
+  done < <(tmux list-panes -aF '#{session_name} #{pane_pid}' 2>/dev/null)
+}
+
 tmux_chdir() {
-  local newdir=$1
-  local curr_session
-  curr_session=$(tmux display -p '#S')
-  local tmp_session
-  tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
-  local width height
-  width=$(tmux display -p '#{window_width}')
-  height=$(tmux display -p '#{window_height}')
-  local initial_clients
-  initial_clients=$(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l)
-  tmux new-session -d -s "$tmp_session" -x "$width" -y "$height"
-  tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
-  (
-    while [[ $(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l) -le $initial_clients ]]; do
-      sleep 0.05
-    done
-    tmux kill-session -t "$tmp_session" 2>/dev/null
-  ) &
-  disown
+local newdir=$1
+local curr_session
+curr_session=$(tmux display -p '#S')
+local tmp_session
+tmp_session=$(cat /dev/urandom | tr -dc 'A-Z0-9' | head -c 8)
+local width height
+width=$(tmux display -p '#{window_width}')
+height=$(tmux display -p '#{window_height}')
+local initial_clients
+initial_clients=$(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l)
+tmux new-session -d -s "$tmp_session" -x "$width" -y "$height"
+tmux send-keys -t "$tmp_session" "unset TMUX && tmux attach-session -t '$curr_session' -c '$newdir'" Enter
+(
+  while [[ $(tmux list-clients -t "$curr_session" 2>/dev/null | wc -l) -le $initial_clients ]]; do
+    sleep 0.05
+  done
+  tmux kill-session -t "$tmp_session" 2>/dev/null
+) &
+disown
 }
 
 open_in_current() {
@@ -48,7 +104,7 @@ open_in_current() {
 }
 
 if [[ -n "$TMUX" ]]; then
-  target_session=$("$TMUX_SESSION_FINDER" "$MODE" "$TARGET")
+  target_session=$(find_session)
   if [[ -n "$target_session" ]]; then
     exec tmux switch-client -t "$target_session"
   else

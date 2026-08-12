@@ -8,18 +8,14 @@
 
     astal.url = "github:aylur/astal";
 
-    hyprland-config = {
-      url = "path:./systems/hyprland";
+    desktop = {
+      url = "path:./systems/desktop/";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
 
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
 
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     flashpoint = {
       url = "path:./flakes/flashpoint";
@@ -45,7 +41,7 @@
       zen-browser,
       astal,
       nixgl,
-      hyprland-config,
+      desktop,
       hytale-launcher,
       flashpoint,
       veadotube-mini,

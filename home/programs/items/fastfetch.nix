@@ -35,78 +35,7 @@
           "1" = "red";
           "2" = "bright_red";
         };
-      };
-      display = {
-        color = {
-          keys   = "yellow";
-          title  = "blue";
-          output = "white";
-        };
-
-        key = {
-          width = 5;
-        };
-      };
-      modules = [
-        "title"
-        {
-          type   = "custom";
-          format = "{#yellow}╭──╮{#}";
-        }
-        {
-          type = "os";
-          key  = "│󱄅 │";
-        }
-        {
-          type = "kernel";
-          key  = "│ │";
-        }
-        {
-          type = "bios";
-          key  = "│ │";
-        }
-        {
-          type = "uptime";
-          key  = "│󰅐 │";
-        }
-        {
-          type = "shell";
-          key  = "│ │";
-        }
-        {
-          type = "terminal";
-          key  = "│ │";
-        }
-        {
-          type = "wm";
-          key  = "│ │";
-        }
-        {
-          type = "cpu";
-          key  = "│ │";
-        }
-        {
-          type = "gpu";
-          key  = "│󰿵 │";
-        }
-        {
-          type = "memory";
-          key  = "│ │";
-        }
-        {
-          type = "disk";
-          key  = "│󰋊 │";
-        } 
-        {
-          type = "localip";
-          key  = "│󰩠 │";
-        } 
-        {
-          type   = "custom";
-          format = "{#yellow}╰──╯{#}";
-        }       
-        "color"        
-      ];
+      };      
     };
   };
 }
