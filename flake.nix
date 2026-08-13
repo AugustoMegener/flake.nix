@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixgl.url = "github:nix-community/nixGL";
 
     hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
