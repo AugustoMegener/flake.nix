@@ -51,6 +51,12 @@
       ...
     }:
     {
+      nixosModules.default = {
+        imports = [
+          ./system
+        ];
+      };
+
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         modules = [
           ./system
