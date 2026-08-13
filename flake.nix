@@ -26,7 +26,7 @@
 
 
     home-utils = {
-      url = "path:AugustoMegener/home-utils";
+      url = "path:AugustoMegener/home-util";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -45,43 +45,17 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
-      zen-browser,
-      nixgl,
-      desktop,
-      bolcheflow,
-      hytale-launcher,
-      flashpoint,
-      veadotube-mini,
       sops-nix,
       ...
-    }@inputs:
+    }:
     {
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./system
-          ./hardware-configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.sharedModules = [
-              sops-nix.homeManagerModules.sops
-            ];
-            home-manager.users.kito = import ./home;
-          }
-          {
-            nixpkgs.overlays = [
-              nixgl.overlay
-            ];
-            environment.systemPackages = [
-              nixgl.packages.x86_64-linux.nixGLIntel
-            ];
-          }
         ];
       };
     };
