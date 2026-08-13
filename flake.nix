@@ -25,11 +25,6 @@
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
 
 
-    home-utils = {
-      url = "path:AugustoMegener/home-util";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
 
     flashpoint = {
       url = "github:AugustoMegener/flashpoint-archive-flake";
