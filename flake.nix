@@ -5,32 +5,42 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nixgl.url = "github:nix-community/nixGL";
 
+    hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
 
-    astal.url = "github:aylur/astal";
+    sops-nix.url = "github:Mic92/sops-nix";
+    audiorelay.url = "github:AugustoMegener/audiorelay-flake";
 
     desktop = {
-      url = "path:./systems/desktop/";
+      url = "github:AugustoMegener/comra-de";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
 
-    hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
-
-
-    flashpoint = {
-      url = "path:./flakes/flashpoint";
-      inputs.nixpkgs.follows = "nixpkgs";  
-    };
-
-    veadotube-mini = {
-      url = "path:./flakes/veadotube-mini";
-      inputs.nixpkgs.follows = "nixpkgs";  
+    bolcheflow = {
+      url = "github:AugustoMegener/bolcheflow";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     bolchevim.url = "github:AugustoMegener/bolchevim"; 
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    audiorelay.url = "github:AugustoMegener/audiorelay-flake";
+
+    home-utils = {
+      url = "path:AugustoMegener/home-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    flashpoint = {
+      url = "github:AugustoMegener/flashpoint-archive-flake";
+      inputs.nixpkgs.follows = "nixpkgs";  
+    };
+
+    veadotube-mini = {
+      url = "github:AugustoMegener/veadotube-mini-flake";
+      inputs.nixpkgs.follows = "nixpkgs";  
+    };
+
   };
 
   outputs =
@@ -39,9 +49,9 @@
       nixpkgs,
       home-manager,
       zen-browser,
-      astal,
       nixgl,
       desktop,
+      bolcheflow,
       hytale-launcher,
       flashpoint,
       veadotube-mini,
@@ -52,9 +62,8 @@
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-
-          ./configuration.nix
-          ./sys-configs
+          ./system
+          ./hardware-configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
