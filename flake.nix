@@ -4,10 +4,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     nixgl.url = "github:nix-community/nixGL";
 
-    hytale-launcher.url = "github:JPyke3/hytale-launcher-nix";
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    audiorelay.url = "github:AugustoMegener/audiorelay-flake";
 
     desktop = {
       url = "github:AugustoMegener/comra-de";
@@ -21,19 +18,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    bolchevim.url = "github:AugustoMegener/bolchevim"; 
-
-
-
-    flashpoint = {
-      url = "github:AugustoMegener/flashpoint-archive-flake";
-      inputs.nixpkgs.follows = "nixpkgs";  
-    };
-
-    veadotube-mini = {
-      url = "github:AugustoMegener/veadotube-mini-flake";
-      inputs.nixpkgs.follows = "nixpkgs";  
-    };
 
   };
 
@@ -41,7 +25,6 @@
     {
       nixpkgs,
       home-manager,
-      sops-nix,
       ...
     }:
     {
@@ -54,7 +37,6 @@
       nixosConfigurations.PrimaryOS = nixpkgs.lib.nixosSystem {
         modules = [
           ./system
-          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
         ];
       };
