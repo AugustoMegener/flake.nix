@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 { 
-  environment.systemPackages = [
+  /*environment.systemPackages = [
     pkgs.devenv
   ];
   scripts.caddy-setcap.exec = lib.mkForce ''
@@ -9,5 +9,5 @@
     sudo setcap 'cap_net_bind_service=+ep' ./bin/caddy
   '';
 
-  processes.caddy-local.exec = ''${lib.replaceString "${pkgs.caddy}" "." config.processes.caddy.exec}'';
+  processes.caddy-local.exec = ''${lib.replaceString "${pkgs.caddy}" "." config.processes.caddy.exec}'';*/
 }
