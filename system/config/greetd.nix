@@ -2,7 +2,7 @@
 {
 
   programs.regreet = {
-    enable = true;
+    enable = false;
 
     cageArgs = [ "-s" ];
     extraCss = builtins.readFile ./greetd.css;
